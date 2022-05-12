@@ -10,7 +10,7 @@ Doc: `metamorph --help`
 
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/metamorph.svg) 
 
-| [Release][doc release]        | [Dev][doc test]           |
+| [Stable][doc release]        | [Dev][doc test]           |
 | ------------- |:-------------:|
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
 
