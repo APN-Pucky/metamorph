@@ -30,6 +30,7 @@ def __main__():
     parser.add_argument("-l","--languages",type=list, help="list of intermediate languages (for more variation choose inherently different languages).", default=["de","fr","es"])
     parser.add_argument("-t","--translators", type=list,help="list of translators (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )",default=["GoogleTranslator"])
     parser.add_argument("-i","--iterations", type=int,help="number of translation iterations (start and goal language must be the same for more than one iteration)",default=1)
+    parser.add_argument("-v","--verbose", type=bool,help="print error messages instead of skipping them",default=False)
     #parser.add_argument("-c","--cross", type=bool,help="mix results between iterations",default=False)
     args = parser.parse_args()
     goal = args.goal_start
@@ -46,10 +47,15 @@ def __main__():
             for st in args.translators:
                 # string translator to class
                 t = getattr(sys.modules[__name__], st)
-                tmp_text = to_translate
-                for i in range(args.iterations):
-                    tmp_text = t(source=lang, target=goal).translate(t(source=start, target=lang).translate(tmp_text))
-                print(get_edits_string(to_translate,tmp_text))
+                try:
+                    tmp_text = to_translate
+                    for i in range(args.iterations):
+                        tmp_text = t(source=lang, target=goal).translate(t(source=start, target=lang).translate(tmp_text))
+                    print(get_edits_string(to_translate,tmp_text))
+                except Exception as e:
+                    if args.verbose:
+                        print(e)
+                    pass
         print()
 
 
