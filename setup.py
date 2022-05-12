@@ -17,7 +17,7 @@ setuptools.setup(
     description="auto rewrite text",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/APN-Pucky/metamorph", #TODO change
+    url="https://github.com/APN-Pucky/metamorph",
     #packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
