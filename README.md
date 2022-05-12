@@ -4,7 +4,9 @@
 
 First line is the input followed by colorized suggestions.
 
-Doc: https://apn-pucky.github.io/metamorph/index.html (wip)
+Doc: `metamorph --help`
+
+(Work-in-progress: Doc: https://apn-pucky.github.io/metamorph/index.html )
 
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/metamorph.svg) 
 
@@ -17,13 +19,13 @@ Doc: https://apn-pucky.github.io/metamorph/index.html (wip)
 ### Stable
 
 ```sh
-pip install autotext [--user] [--upgrade]
+pip install metamorph [--user] [--upgrade]
 ```
 
 ### Dev
 
 ```sh
-pip install --index-url https://test.pypi.org/simple/ autotext [--user] [--upgrade]
+pip install --index-url https://test.pypi.org/simple/ metamorph [--user] [--upgrade]
 ```
 [doc release]: https://apn-pucky.github.io/metamorph/index.html
 [doc test]: https://apn-pucky.github.io/metamorph/test/index.html
