@@ -4,8 +4,6 @@
 
 First line is the input followed by colorized suggestions.
 
-Doc: <https://apn-pucky.github.io/autotext/index.html>
-
 ## Versions
 
 ### Stable
