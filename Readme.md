@@ -11,11 +11,11 @@ Doc: <https://apn-pucky.github.io/autotext/index.html>
 ### Stable
 
 ```sh
-pip install autotext [--user --upgrade]
+pip install autotext [--user] [--upgrade]
 ```
 
 ### Dev
 
 ```sh
-pip install --index-url https://test.pypi.org/simple/ autotext [--user --upgrade]
+pip install --index-url https://test.pypi.org/simple/ autotext [--user] [--upgrade]
 ```
