@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import deep_translator
 from deep_translator import * 
 from termcolor import colored
 import difflib
@@ -39,6 +40,7 @@ def __main__():
     parser.add_argument("-t","--translators", type=str,nargs='+',help="list of translators (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )",default=["GoogleTranslator"])
     parser.add_argument("-i","--iterations", type=int,help="number of translation iterations (start and goal language must be the same for more than one iteration)",default=1)
     parser.add_argument("-v","--verbose", type=bool,help="print error messages instead of skipping them",default=False)
+    parser.add_argument("-q","--quiet", type=bool,help="suppress error messages",default=False)
     #parser.add_argument("-c","--cross", type=bool,help="mix results between iterations",default=False)
     args = parser.parse_args()
     goal = args.goal_start
@@ -60,6 +62,9 @@ def __main__():
                     for i in range(args.iterations):
                         tmp_text = t(source=lang, target=goal).translate(t(source=start, target=lang).translate(tmp_text))
                     print(get_edits_string(to_translate,tmp_text))
+                except deep_translator.exceptions.LanguageNotSupportedException as e:
+                    if not args.quiet:
+                        print(e)
                 except Exception as e:
                     if args.verbose:
                         print(e)
