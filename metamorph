@@ -23,7 +23,7 @@ def get_edits_string(old, new):
     return result
 
 def __main__():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Metamorph text by passing through several translators.')
     parser.add_argument("-gs","--goal-start",type=str, help="initial and final language", default="en")
     parser.add_argument("-g","--goal",type=str, help="final language", default=None)
     parser.add_argument("-s","--start",type=str, help="initial language", default=None)

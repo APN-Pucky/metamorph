@@ -10,14 +10,14 @@ requirements = [
 
 
 setuptools.setup(
-    name="autotext",
+    name="metamorph",
     setup_requires=['setuptools-git-versioning'],
     author="APN",
     author_email="APN-Pucky@no-reply.github.com",
     description="auto rewrite text",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/APN-Pucky/autotext", #TODO change
+    url="https://github.com/APN-Pucky/metamorph", #TODO change
     #packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -34,6 +34,6 @@ setuptools.setup(
         "version_file": None,
         "count_commits_from_version_file": False
     },
-    scripts=['autotext'],
+    scripts=['metamorph'],
     python_requires='>=3.6',
 )
