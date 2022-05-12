@@ -4,7 +4,7 @@
 
 First line is the input followed by colorized suggestions.
 
-Doc: https://apn-pucky.github.io/metamorph/index.html (wip)
+Doc: https://apn-pucky.github.io/metamorph/index.html (WIP)
 
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/metamorph.svg) 
 
