@@ -19,13 +19,13 @@ Doc: `metamorph --help`
 ### Stable
 
 ```sh
-pip install autotext [--user] [--upgrade]
+pip install metamorph [--user] [--upgrade]
 ```
 
 ### Dev
 
 ```sh
-pip install --index-url https://test.pypi.org/simple/ autotext [--user] [--upgrade]
+pip install --index-url https://test.pypi.org/simple/ metamorph [--user] [--upgrade]
 ```
 [doc release]: https://apn-pucky.github.io/metamorph/index.html
 [doc test]: https://apn-pucky.github.io/metamorph/test/index.html
