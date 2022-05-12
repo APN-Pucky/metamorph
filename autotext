@@ -1,0 +1,51 @@
+#!/usr/bin/python3
+from deep_translator import * 
+from termcolor import colored
+import difflib
+import argparse
+import sys
+
+
+def get_edits_string(old, new):
+    result = ""
+    codes = difflib.SequenceMatcher(a=old, b=new).get_opcodes()
+    for code in codes:
+        if code[0] == "equal": 
+            result += old[code[1]:code[2]]
+            #result += white(old[code[1]:code[2]])
+        #elif code[0] == "delete":
+            #result += red(old[code[1]:code[2]])
+        elif code[0] == "insert":
+            result += colored(new[code[3]:code[4]],'green')
+        elif code[0] == "replace":
+            #result += red(old[code[1]:code[2]]) 
+            result += colored(new[code[3]:code[4]],'green')
+    return result
+
+def __main__():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-g","--goal",type=str, help="final language", default="en")
+    parser.add_argument("-s","--start",type=str, help="initial language", default="en")
+    parser.add_argument("-l","--languages",type=list, help="list of intermediate languages (for more variation choose inherently different languages).", default=["de","fr","es"])
+    parser.add_argument("-t","--translators", type=list,help="list of translators (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )",default=["GoogleTranslator"])
+    parser.add_argument("-i","--iterations", type=int,help="number of translation iterations (start and goal language must be the same for more than one iteration)",default=1)
+    #parser.add_argument("-c","--cross", type=bool,help="mix results between iterations",default=False)
+    args = parser.parse_args()
+    assert (not (args.iterations > 1 and args.goal != args.start))
+    while True:
+        print("Text:")
+        to_translate = input()
+        for lang in args.languages:
+            for st in args.translators:
+                # string translator to class
+                t = getattr(sys.modules[__name__], st)
+                tmp_text = to_translate
+                for i in range(args.iterations):
+                    tmp_text = t(source=lang, target=args.goal).translate(t(source=args.start, target=lang).translate(tmp_text))
+                print(get_edits_string(to_translate,tmp_text))
+        print()
+
+
+__main__()
+
+
