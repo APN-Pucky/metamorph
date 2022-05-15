@@ -18,7 +18,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/APN-Pucky/metamorph",
-    #packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
@@ -34,6 +34,9 @@ setuptools.setup(
         "version_file": None,
         "count_commits_from_version_file": False
     },
-    scripts=['metamorph'],
+    #scripts=['metamorph'],
+    entry_points = {
+        'console_scripts': ['metamorph=metamorph.main:__main__'],
+    },
     python_requires='>=3.6',
 )
