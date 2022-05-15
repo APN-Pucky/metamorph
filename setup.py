@@ -6,6 +6,7 @@ with open("README.md", "r") as fh:
 requirements = [
     "termcolor",
     "deep_translator",
+    "colorama",
 ]
 
 

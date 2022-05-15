@@ -3,6 +3,7 @@ import deep_translator
 from deep_translator import * 
 from termcolor import colored
 import difflib
+import colorama
 import argparse
 import sys
 import pkg_resources as pkg
@@ -43,6 +44,7 @@ def __main__():
     parser.add_argument("-q","--quiet", type=bool,help="suppress error messages",default=False)
     #parser.add_argument("-c","--cross", type=bool,help="mix results between iterations",default=False)
     args = parser.parse_args()
+    colorama.init()
     goal = args.goal_start
     start = args.goal_start 
     if args.goal is not None:
