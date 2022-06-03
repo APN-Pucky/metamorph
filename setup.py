@@ -7,6 +7,7 @@ requirements = [
     "termcolor",
     "deep_translator",
     "colorama",
+    "pyyaml",
 ]
 
 

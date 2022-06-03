@@ -1,0 +1,12 @@
+goal: "en"
+start: "en"
+translator: "GoogleTranslator"
+
+flow:
+  de:
+    fr:
+      es:
+        fr:
+    de:
+  fr:
+  en:

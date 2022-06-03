@@ -42,6 +42,7 @@ def __main__():
     parser.add_argument("-i","--iterations", type=int,help="number of translation iterations (start and goal language must be the same for more than one iteration)",default=1)
     parser.add_argument("-v","--verbose", type=bool,help="print error messages instead of skipping them",default=False)
     parser.add_argument("-q","--quiet", type=bool,help="suppress error messages",default=False)
+    parser.add_argument("-c","--config", type=str,help="load config from a file",default=False)
     #parser.add_argument("-c","--cross", type=bool,help="mix results between iterations",default=False)
     args = parser.parse_args()
     colorama.init()
