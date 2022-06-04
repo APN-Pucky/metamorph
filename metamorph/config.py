@@ -51,6 +51,8 @@ class Config:
  
         if "language" not in direct[k]["extra"]:
             direct[k]["extra"]["language"] =  k
+        if "result" not in direct[k]["extra"]:
+            direct[k]["extra"]["result"] =  ""
  
 
     def fill_missing(self,direct):
@@ -58,7 +60,9 @@ class Config:
             print(direct[k])
             if is_end(direct[k]):
                 if self.goal is not None:
-                    direct[k] = {self.goal:{"extra":{"translator":self.translator, "language" : k}}}
+                    direct[k] = {self.goal:{}}
+                    self.default_extra(direct,k)
+                    self.default_extra(direct[k],self.goal)
                 else:
                     if direct[k] is None:
                         direct[k] = {}
@@ -68,33 +72,54 @@ class Config:
             self.fill_missing(direct[k])
 
 
-    def print_diagram(self):
+    def str_diagram(self,nodes="language",arrows=None):
         s = ""
         for k in no_extra(self.flow):
-            s = s + self.recursive_print_diagram(self.flow,k) + "\n\n"
+            s = s + self.recursive_str_diagram(self.flow,k,nodes=nodes,arrows=arrows) + "\n\n"
         return s
 
-    def recursive_print_diagram(self,sub,kk,depth=1,lines=[],show_arrows=True,nodes="language",arrows="translator_short"):
-        tran = sub[kk]["extra"][arrows] if show_arrows else ""
+    def recursive_get_str_max_length(self,sub,key):
+        ret = len(sub["extra"][key])
+        for k in no_extra(sub):
+            m = self.recursive_get_str_max_length(sub[k],key)
+            if m > ret:
+                ret =m
+        return ret
+
+
+    def recursive_str_diagram(self,sub,kk,depth=1,lines=[],nodes="language",arrows=None,leng=None):
+        if leng is None:
+            len_arrows =0
+            if  arrows is not None:
+                len_arrows = self.recursive_get_str_max_length(sub[kk],arrows)
+            else:
+                len_arrows = 0
+            len_nodes = self.recursive_get_str_max_length(sub[kk],nodes)
+            leng = max(len_nodes,len_arrows+8)
+        tran = sub[kk]["extra"][arrows] if arrows is not None else ""
+        tran = tran + "-"*(leng-len(tran)-8)
+        #print(sub,kk,sub[kk])
+        node = sub[kk]["extra"][nodes]
+        node = node + " "*(leng -len(node))
         s = ""
         if not is_end(sub[kk]):
             tlines = lines+[depth]
-            s = (" ---" + tran +"--> " if depth !=1 else "") + sub[kk]["extra"][nodes]
+            s = ("----" + tran +"--> " if depth !=1 else "") + node
             for i,k in enumerate(no_extra(sub[kk])):
                 if i == 0:
-                    s = s + "" +""  
+                    s = s + "|" +""  
                 else:
-                    for i in range(2):
+                    for l in range(2):
                         s = s + "\n"
                         for j in range(depth):
-                            s = s + (" |" if j+1 in tlines else "  ")
+                            s = s + (" "*(leng) + "|" if j+1 in tlines else " "*(leng+1))
                             if j < depth-1:
-                                s = s + "        " + " "*len(tran)
-                s = s + self.recursive_print_diagram(sub[kk],k,depth=depth+1,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
+                                s = s + " "*(leng)
+                s = s + self.recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,leng=leng,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
             return s
         else:
-                return " ---" + tran+ "--> " + sub[kk]["extra"][nodes]
+                return "----" + tran+ "--> " + node 
     
 c = Config('config.yml')
-s=c.print_diagram()
+s=c.str_diagram()
 print(s)

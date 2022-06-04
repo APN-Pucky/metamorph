@@ -8,6 +8,8 @@ import argparse
 import sys
 import pkg_resources as pkg
 
+from metamorph.config import Config, is_end, no_extra
+
 package = "metamorph"
 
 try:
@@ -55,31 +57,51 @@ def __main__():
         goal = args.goal
     if args.start is not None:
         start= args.start
+
+    conf = Config('config.yml')
+    print(conf.str_diagram())
     
-    assert (not (args.iterations > 1 and args.goal != args.start))
     while True:
         print("Text:")
         to_translate = input()
-        for lang in args.languages:
-            for st in args.translators:
-                # string translator to class
-                t = getattr(sys.modules[__name__], st)
-                try:
-                    tmp_text = to_translate
-                    for i in range(args.iterations):
-                        tmp_text = t(source=lang, target=goal).translate(t(source=start, target=lang).translate(tmp_text))
-                    if args.colour:
-                        print(get_edits_string(to_translate,tmp_text))
-                    else:
-                        print(tmp_text)
-                except deep_translator.exceptions.LanguageNotSupportedException as e:
-                    if not args.quiet:
-                        print(e)
-                except Exception as e:
-                    if args.verbose:
-                        print(e)
-                    pass
+        s  =[]
+        for k in no_extra(conf.flow):
+            conf.flow[k]["extra"]["result"] = to_translate
+            s = s + recursive_translate(conf,conf.flow,k)
+        for tmp_text in s:
+            if args.colour:
+                print(get_edits_string(to_translate,tmp_text))
+            else:
+                print(tmp_text)
         print()
+
+        print(conf.str_diagram(nodes="result",arrows="language"))
+
+def translate(trans,source,target,text,quiet=False,verbose=True):
+    try:
+        return trans(source=source,target=target).translate(text)
+    except deep_translator.exceptions.LanguageNotSupportedException as e:
+        if not quiet:
+            print(e)
+    except Exception as e:
+        if verbose:
+            print(e)
+        pass
+    return ""
+
+def recursive_translate(conf,sub,kk):
+    ret = []
+    if not is_end(sub[kk]):
+        text = sub[kk]["extra"]["result"]
+        source = sub[kk]["extra"]["language"]
+        for i,k in enumerate(no_extra(sub[kk])):
+            target = sub[kk][k]["extra"]["language"]
+            t = getattr(sys.modules[__name__], sub[kk][k]["extra"]["translator"])
+            sub[kk][k]["extra"]["result"] = translate(t,source ,target,text)
+            ret = ret + recursive_translate(conf,sub[kk],k)
+        return ret
+    else:
+        return [sub[kk]["extra"]["result"]]
 
 
 __main__()

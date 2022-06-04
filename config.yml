@@ -1,17 +1,16 @@
 translator: "GoogleTranslator"
 start: "en"
+goal: "en"
 
 flow:
   de:
     fr:
       es:
         fr:
-          extra:
-            translator: "HI"
     de:
       es:
       fr:
-        jp:
+        sv:
   fr:
     en:
   en:
@@ -23,5 +22,5 @@ flow:
       de:
         es:
         fr:
-          jp:
-  jp:
+          sv:
+  sv:
