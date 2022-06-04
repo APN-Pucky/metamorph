@@ -20,14 +20,17 @@ remove_lower = lambda text: re.sub('[a-z]', '', text)
 # TODO add api key option
 # TODO handle same languages follow case
 class Config:
-    def __init__(self,file:str=None, start = None, goal = None ,translator="GoogleTranslator", flow = None,):
+    def __init__(self,file:str=None, start = None, goal = None ,translator=None, flow = None,):
         if file is not None:
             self.load_file(file)
-        self.goal = goal
-        self.start = start
+        if goal is not None:
+            self.goal = goal
+        if start is not None:
+            self.start = start
         if flow is not None:
             self.flow = flow
-        self.translator = translator
+        if translator is not None:
+            self.translator = translator
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
