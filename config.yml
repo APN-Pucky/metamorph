@@ -1,6 +1,6 @@
 translator: "GoogleTranslator"
-start: "en"
-goal: "en"
+start: "de"
+goal: "de"
 
 flow:
   de:

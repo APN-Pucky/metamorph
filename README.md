@@ -27,6 +27,42 @@ pip install metamorph [--user] [--upgrade]
 ```sh
 pip install --index-url https://test.pypi.org/simple/ metamorph [--user] [--upgrade]
 ```
+
+## Configuration
+
+config.yml
+```yml
+translator: "GoogleTranslator"
+start: "en"
+goal: "en"
+
+flow:
+  de:
+    fr:
+      es:
+        fr:
+    de:
+      es:
+      fr:
+        sv:
+  fr:
+    en:
+  en:
+  fi:
+    de:
+      fr:
+        es:
+          fr:
+      de:
+        es:
+        fr:
+          sv:
+  sv:
+```
+
+![DIAG](/img/diag.png)
+
+
 [doc release]: https://apn-pucky.github.io/metamorph/index.html
 [doc test]: https://apn-pucky.github.io/metamorph/test/index.html
 
@@ -37,3 +73,5 @@ pip install --index-url https://test.pypi.org/simple/ metamorph [--user] [--upgr
 [a s link]: https://github.com/APN-Pucky/metamorph/actions/workflows/release.yml
 [a t link]: https://github.com/APN-Pucky/metamorph/actions/workflows/test.yml
 [a t image]: https://github.com/APN-Pucky/metamorph/actions/workflows/test.yml/badge.svg
+
+
