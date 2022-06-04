@@ -13,8 +13,7 @@ def no_extra(dic):
     return r
 
 remove_lower = lambda text: re.sub('[a-z]', '', text)
-# TODO add api key option
-# TODO handle same languages follow case
+
 class Config:
     def __init__(self,file:str=None, start = None, goal = None ,translator=None, flow = None,):
         if file is not None:
@@ -95,7 +94,6 @@ class Config:
         if len_nodes is None:
             len_nodes = self.recursive_get_str_max_length(sub[kk],nodes)
             len_nodes = len_nodes +1
-            # leng = max(len_nodes,len_arrows+7)
         tran = sub[kk]["extra"][arrows] if arrows is not None else ""
         tran = tran + "-"*(len_arrows-len(tran)-7)
         node = sub[kk]["extra"][nodes]

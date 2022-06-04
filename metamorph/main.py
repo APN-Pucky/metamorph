@@ -40,10 +40,9 @@ def __main__():
     parser.add_argument("-g","--goal",type=str, help="final language", default=None)
     parser.add_argument("-s","--start",type=str, help="initial language", default=None)
     parser.add_argument("-t","--translator", type=str,help="default translator (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )",default="GoogleTranslator")
+    parser.add_argument("-l","--languages",type=str,nargs='+', help="list of intermediate languages (for more variation choose inherently different languages).", default=["de","fr","es"])
 
     parser.add_argument("-c","--config", type=str,help="load config from a file",default=None)
-    parser.add_argument("-l","--languages",type=str,nargs='+', help="list of intermediate languages (for more variation choose inherently different languages).", default=["de","fr","es"])
-    #parser.add_argument("-i","--iterations", type=int,help="number of translation iterations (start and goal language must be the same for more than one iteration)",default=1)
     parser.add_argument("-v","--verbose", type=bool,help="print error messages instead of skipping them",default=False)
     parser.add_argument("-q","--quiet", type=bool,help="suppress error messages",default=False)
 
@@ -53,7 +52,7 @@ def __main__():
     parser.add_argument("-sdi", "--show-diagram-init", action='store_false', help="print the diagram translation flow",default=True)
     parser.add_argument("-hdi", "--hide-diagram-init", dest='show_diagram_init',action='store_false', help="don't print the diagram translation flow")
     parser.add_argument("-sdr", "--show-diagram-result", action='store_true', help="print the diagram including intermediate translations",default=False )
-    #parser.add_argument("-c","--cross", type=bool,help="mix results between iterations",default=False)
+
     args = parser.parse_args()
     if args.colour:
         colorama.init()
