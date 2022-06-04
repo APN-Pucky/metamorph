@@ -81,7 +81,7 @@ metamorph -sd -gs en -c config.yml
 
 [a s image]: https://github.com/APN-Pucky/metamorph/actions/workflows/release.yml/badge.svg
 [a s link]: https://github.com/APN-Pucky/metamorph/actions/workflows/release.yml
-[a t link]: https://github.com/APN-Pucky/metamorph/actions/workflows/test.yml
-[a t image]: https://github.com/APN-Pucky/metamorph/actions/workflows/test.yml/badge.svg
+[a t link]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml
+[a t image]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml/badge.svg
 
 
