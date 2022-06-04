@@ -35,8 +35,8 @@ For a list of parameters run `metamorph -h`.
 The root node `flow` can have multiple different starting languages (given `start` is None).
 ```yml
 translator: "GoogleTranslator"
-start: "en"
-goal: "en"
+start: "de"
+goal: "de"
 
 flow:
   de:
