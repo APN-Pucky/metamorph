@@ -8,6 +8,7 @@ requirements = [
     "deep_translator",
     "colorama",
     "pyyaml",
+    "numpy",
 ]
 
 

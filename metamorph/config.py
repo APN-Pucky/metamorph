@@ -1,62 +1,55 @@
+from os import remove
 import yaml
 import requests
-
-
-def dot_to_ascii(dot: str, fancy: bool = True):
-
-    url = 'https://dot-to-ascii.ggerganov.com/dot-to-ascii.php'
-    boxart = 0
-
-    # use nice box drawing char instead of + , | , -
-    if fancy:
-        boxart = 1
-
-    params = {
-        'boxart': boxart,
-        'src': dot,
-    }
-
-    response = requests.get(url, params=params).text
-
-    if response == '':
-        raise SyntaxError('DOT string is not formatted correctly')
-
-    return response
+import pydot
+import re
 
 
 
+remove_lower = lambda text: re.sub('[a-z]', '', text)
 # TODO add api key option
 # TODO handle same languages follow case
 class Config:
-    def __init__(self,file:str=None, start = "en", goal = "en" , flow = None,):
+    def __init__(self,file:str=None, start = "en", goal = "en" ,translator="GoogleTranslator", flow = None,):
+        self.glv =1
         self.goal = goal
         self.start = start
         self.flow = flow
+        self.translator = translator
         if file is not None:
             self.load_file(file)
 
     def load_file(self,file:str):
         with open(file, 'r') as file:
             conf = yaml.safe_load(file)
+            self.translator= conf['translator']
             self.goal = conf['goal']
             self.start = conf['start']
             self.flow = conf['flow']
 
     def print_diagram(self):
-        recursive_print_diagram({self.start : self.flow})
-def recursive_print_diagram(sub,depth=0):
-    if sub is not None:
-        for k in sub.keys():
-            if sub[k] is not None:
-                s = ""
-                s = s + k + " -> { rank = same;"
-                for ss in sub[k]:
-                    s = s + ss + " "
-                s = s + "}"
-                print(s)
-        for k in sub.keys():
-            if sub[k] is not None:
-                recursive_print_diagram(sub[k])
+        return self.recursive_print_diagram({self.start : self.flow},self.start)
+    def recursive_print_diagram(self,sub,kk,depth=1,lines=[],show_translator=False):
+        tran = remove_lower(self.translator) if show_translator else ""
+        s = ""
+        if sub[kk] is not None:
+            tlines = lines+[depth]
+            s = (" ---" + tran +"--> " if depth !=1 else "") + kk
+            for i,k in enumerate(sub[kk].keys()):
+                if i == 0:
+                    s = s + "" +""  
+                else:
+                    for i in range(2):
+                        s = s + "\n"
+                        for j in range(depth):
+                            s = s + (" |" if j+1 in tlines else "  ")
+                            if j < depth-1:
+                                s = s + "        " + " "*len(tran)
+                s = s + self.recursive_print_diagram(sub[kk],k,depth=depth+1,lines=tlines if i+1 != len(sub[kk].keys()) else lines)
+            return s
+        else:
+            return " ---" + tran+ "--> " + kk + " ---" +tran + "--> " + self.goal
+    
 c = Config('config.yml')
-print(c.__dict__)
-c.print_diagram()
+s=c.print_diagram()
+print(s)
