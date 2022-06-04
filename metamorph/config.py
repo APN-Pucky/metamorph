@@ -1,10 +1,6 @@
 from os import remove
 import yaml
-import requests
-import pydot
 import re
-
-
 
 def is_end(dic):
     b = dic is None or (len(dic.keys()) == 1 and 'extra' in dic.keys())
