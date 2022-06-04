@@ -30,7 +30,9 @@ pip install --index-url https://test.pypi.org/simple/ metamorph [--user] [--upgr
 
 ## Configuration
 
-config.yml
+For a list of parameters run `metamorph -h`.
+
+An exemplary config.yml will produce these results (note `-sd` for diagrams and `-c` for config, while most command line parameters take precedence).
 ```yml
 translator: "GoogleTranslator"
 start: "en"
