@@ -70,6 +70,8 @@ metamorph -sd -gs en -c config.yml
 
 ![DIAG](/img/diag.png)
 
+(GoogleTranslate` gets abbreviated to `GT`)
+
 
 [doc release]: https://apn-pucky.github.io/metamorph/index.html
 [doc test]: https://apn-pucky.github.io/metamorph/test/index.html
