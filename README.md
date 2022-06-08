@@ -10,7 +10,7 @@ Doc: `metamorph --help`
 
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/metamorph.svg) 
 
-| [Stable][doc release]        | [Dev][doc test]           |
+| [Stable][doc release]        | [Unstable][doc test]           |
 | ------------- |:-------------:|
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
 
@@ -77,9 +77,9 @@ metamorph -sd -gs en -c config.yml
 [pypi image]: https://badge.fury.io/py/metamorph.svg
 [pypi link]: https://pypi.org/project/metamorph/
 
-[a s image]: https://github.com/APN-Pucky/metamorph/actions/workflows/release.yml/badge.svg
-[a s link]: https://github.com/APN-Pucky/metamorph/actions/workflows/release.yml
-[a t link]: https://github.com/APN-Pucky/metamorph/actions/workflows/test.yml
-[a t image]: https://github.com/APN-Pucky/metamorph/actions/workflows/test.yml/badge.svg
+[a s image]: https://github.com/APN-Pucky/metamorph/actions/workflows/stable.yml/badge.svg
+[a s link]: https://github.com/APN-Pucky/metamorph/actions/workflows/stable.yml
+[a t link]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml
+[a t image]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml/badge.svg
 
 
