@@ -11,7 +11,7 @@ jobs:
         image: apnpucky/ubuntu-pip
       steps:
         - name: work around permission issue
-          run: git config --global --add safe.directory /__w/smpl/smpl
+          run: git config --global --add safe.directory /__w/metamorph/metamorph
         - uses: actions/checkout@v2
           with:
             fetch-depth: "0"
