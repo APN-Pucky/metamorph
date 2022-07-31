@@ -2,6 +2,8 @@ name: Fast-Forward Label
 
 on:
   pull_request:
+  issue_comment:
+    types: [created]
 
 # avoid running multiples
 concurrency:
