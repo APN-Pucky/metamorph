@@ -24,6 +24,6 @@ jobs:
         with:
           labels: fast-forward
       - uses: actions-ecosystem/action-remove-labels@v1
-        if: "!git merge-base --is-ancestor  ${{ github.event.pull_request.base.ref }}  ${{ github.event.pull_request.head.ref }}"
+        if: "! git merge-base --is-ancestor  ${{ github.event.pull_request.base.ref }}  ${{ github.event.pull_request.head.ref }}"
         with:
           labels: fast-forward
