@@ -10,7 +10,7 @@ concurrency:
 
 
 jobs:
-  ff-add:
+  ff-label:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
