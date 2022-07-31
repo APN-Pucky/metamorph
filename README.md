@@ -13,7 +13,7 @@ Doc: `metamorph --help`
 | [Stable][doc release]        | [Unstable][doc test]           |
 | ------------- |:-------------:|
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
-| [![Codacy Badge][codacy s quality image]][codacy s quality link]     |[![Codacy Badge][codacy quality image]][codacy quality link] | 
+| [![Codacy Badge][cc s q i]][cc s q l]     |[![Codacy Badge][cc q i]][cc q l] | 
 
 ## Versions
 
@@ -85,7 +85,7 @@ metamorph -sd -gs en -c config.yml
 [a t link]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml
 [a t image]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml/badge.svg
 
-[codacy s quality image]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34?branch=stable
-[codacy s quality link]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade?branch=stable
-[codacy quality image]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34
-[codacy quality link]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade
+[cc s q i]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34?branch=stable
+[cc s q l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade?branch=stable
+[cc q i]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34
+[cc q l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade
