@@ -45,7 +45,6 @@ class Config:
             direct[k]["extra"]["translator"] = self.translator
         if "translator_short" not in direct[k]["extra"]:
             direct[k]["extra"]["translator_short"] = remove_lower(self.translator)
- 
         if "language" not in direct[k]["extra"]:
             direct[k]["extra"]["language"] =  k
         if "result" not in direct[k]["extra"]:
@@ -105,7 +104,7 @@ class Config:
             s = ("---" + tran +"--> " if depth !=1 else "") + node
             for i,k in enumerate(no_extra(sub[kk])):
                 if i == 0:
-                    s = s + "|" +""  
+                    s = s + "|"
                 else:
                     for _ in range(2):
                         s = s + "\n"
@@ -116,4 +115,4 @@ class Config:
                 s = s + self.recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
             return s
         else:
-                return "---" + tran+ "--> " + node 
+                return "---" + tran+ "--> " + node
