@@ -85,7 +85,7 @@ metamorph -sd -gs en -c config.yml
 [a t link]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml
 [a t image]: https://github.com/APN-Pucky/metamorph/actions/workflows/unstable.yml/badge.svg
 
-[codacy quality image]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34?branch=stable
-[codacy quality link]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade?branch=stable
+[codacy s quality image]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34?branch=stable
+[codacy s quality link]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade?branch=stable
 [codacy quality image]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34
 [codacy quality link]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade
