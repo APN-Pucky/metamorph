@@ -27,7 +27,9 @@ jobs:
       - uses: actions-ecosystem/action-add-labels@v1
         if: env.FFL == 'true' 
         with:
-          labels: fast-forward
+          labels: 
+           - fast-forward
+           - PR: needs rebase
       - uses: actions-ecosystem/action-remove-labels@v1
         if: env.FFL == 'false' 
         with:
