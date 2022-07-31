@@ -2,8 +2,11 @@ name: stable
 
 on: 
   push:
+    branches:
+      - 'stable'
     tags: 
       - '*'
+
 jobs:
     default:
       runs-on: ubuntu-latest
