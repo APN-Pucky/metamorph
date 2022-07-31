@@ -22,15 +22,11 @@ def get_edits_string(old, new):
     result = ""
     codes = difflib.SequenceMatcher(a=old, b=new).get_opcodes()
     for code in codes:
-        if code[0] == "equal": 
+        if code[0] == "equal":
             result += old[code[1]:code[2]]
-            #result += white(old[code[1]:code[2]])
-        #elif code[0] == "delete":
-            #result += red(old[code[1]:code[2]])
         elif code[0] == "insert":
             result += colored(new[code[3]:code[4]],'green')
         elif code[0] == "replace":
-            #result += red(old[code[1]:code[2]]) 
             result += colored(new[code[3]:code[4]],'green')
     return result
 
@@ -57,7 +53,7 @@ def __main__():
     if args.colour:
         colorama.init()
     goal = args.goal_start
-    start = args.goal_start 
+    start = args.goal_start
     if args.goal is not None:
         goal = args.goal
     if args.start is not None:
@@ -72,7 +68,7 @@ def __main__():
     if args.show_diagrams or args.show_diagram_init:
         print("Loaded translation diagram:")
         print(conf.str_diagram(nodes="language" ,arrows="translator_short"))
-    
+
     while True:
         print("Text:")
         to_translate = input()
@@ -89,7 +85,7 @@ def __main__():
         if args.show_diagrams or args.show_diagram_result:
             print("Diagram:")
             print(conf.str_diagram(nodes="result",arrows="language"))
-
+            
 def translate(trans,source,target,text,quiet=False,verbose=True):
     try:
         return trans(source=source,target=target).translate(text)
@@ -117,5 +113,3 @@ def recursive_translate(conf,sub,kk):
 
 
 __main__()
-
-
