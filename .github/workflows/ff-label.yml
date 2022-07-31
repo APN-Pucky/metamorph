@@ -1,14 +1,7 @@
 name: Fast-Forward Label
 
 on:
-  push:
-    branches:
-      - ${{ github.event.pull_request.head.ref }}
-      - ${{ github.event.pull_request.head.ref }}
   pull_request:
-    branches:
-      - ${{ github.event.pull_request.head.ref }}
-      - ${{ github.event.pull_request.head.ref }}
 
 # avoid running multiples
 concurrency:
