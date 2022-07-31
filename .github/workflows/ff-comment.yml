@@ -15,7 +15,7 @@ jobs:
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
-            Hurray, this comment is `/fast-forward`-able
+            Hurray, this PR is `/fast-forward`-able
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
           allow-repeats: false # This is the default
