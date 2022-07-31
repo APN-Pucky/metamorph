@@ -19,11 +19,11 @@ jobs:
           fetch-depth: 0
       - run: git fetch origin ${{ github.event.pull_request.head.ref }}:${{ github.event.pull_request.head.ref }}
       - run: git fetch origin ${{ github.event.pull_request.base.ref }}:${{ github.event.pull_request.base.ref }}
-      - run: git merge-base --is-ancestor ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.head.ref }}
-      - uses: mshick/add-pr-comment@v1
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ git merge-base --is-ancestor github.event.pull_request.base.ref  github.event.pull_request.head.ref }}
         with:
-          message: |
-            Hurray, this PR is `/fast-forward`-able
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
-          allow-repeats: true # This is the default
+          labels: fast-forward
+      - uses: actions-ecosystem/action-remove-labels@v1
+        if: ${{ ! git merge-base --is-ancestor  github.event.pull_request.base.ref  github.event.pull_request.head.ref }}
+        with:
+          labels: fast-forward
