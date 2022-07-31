@@ -40,7 +40,7 @@ jobs:
         if: env.FFL == 'true' 
         with:
           message: |
-            Hurray, this PR is `/fast-forward`-able
+            Hurray, this PR is `/fast-forward`-able (as long as the label remains)
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
           allow-repeats: false # This is the default
