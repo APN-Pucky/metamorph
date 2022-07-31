@@ -1,4 +1,3 @@
-from os import remove
 import yaml
 import re
 
@@ -84,7 +83,9 @@ class Config:
         return ret
 
 
-    def recursive_str_diagram(self,sub,kk,depth=1,lines=[],nodes="language",arrows=None,len_nodes=None,len_arrows=None):
+    def recursive_str_diagram(self,sub,kk,depth=1,lines=None,nodes="language",arrows=None,len_nodes=None,len_arrows=None):
+        if lines is None:
+            lines = []
         if len_arrows is None:
             len_arrows =0
             if  arrows is not None:
@@ -106,7 +107,7 @@ class Config:
                 if i == 0:
                     s = s + "|" +""  
                 else:
-                    for l in range(2):
+                    for _ in range(2):
                         s = s + "\n"
                         for j in range(depth):
                             s = s + (" "*(len_nodes) + "|" if j+1 in tlines else " "*(len_nodes+1))
