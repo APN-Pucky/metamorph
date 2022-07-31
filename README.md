@@ -73,7 +73,6 @@ metamorph -sd -gs en -c config.yml
 
 (`GoogleTranslate` gets abbreviated to `GT`)
 
-
 [doc release]: https://apn-pucky.github.io/metamorph/index.html
 [doc test]: https://apn-pucky.github.io/metamorph/test/index.html
 
@@ -89,4 +88,3 @@ metamorph -sd -gs en -c config.yml
 [cc s q l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade?branch=stable
 [cc q i]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34
 [cc q l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade
-
