@@ -99,7 +99,6 @@ def translate(trans,source,target,text,quiet=False,verbose=True):
     except Exception as e:
         if verbose:
             print(e)
-        pass
     return ""
 
 def recursive_translate(conf,sub,kk):
@@ -107,7 +106,7 @@ def recursive_translate(conf,sub,kk):
     if not is_end(sub[kk]):
         text = sub[kk]["extra"]["result"]
         source = sub[kk]["extra"]["language"]
-        for i,k in enumerate(no_extra(sub[kk])):
+        for _,k in enumerate(no_extra(sub[kk])):
             target = sub[kk][k]["extra"]["language"]
             t = getattr(sys.modules[__name__], sub[kk][k]["extra"]["translator"])
             sub[kk][k]["extra"]["result"] = translate(t,source ,target,text)
