@@ -1,4 +1,4 @@
-# Metamorph
+# metamorph
 
 ![IMG](/img/img.png)
 
