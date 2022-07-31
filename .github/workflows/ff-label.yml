@@ -32,3 +32,11 @@ jobs:
         if: env.FFL == 'false' 
         with:
           labels: fast-forward
+      - uses: mshick/add-pr-comment@v1
+        if: env.FFL == 'true' 
+        with:
+          message: |
+            Hurray, this PR is `/fast-forward`-able
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
+          allow-repeats: false # This is the default
