@@ -2,8 +2,6 @@ name: Fast-Forward Label
 
 on:
   pull_request:
-  issue_comment:
-    types: [created]
 
 # avoid running multiples
 concurrency:
@@ -13,7 +11,6 @@ concurrency:
 jobs:
   ff-label:
     runs-on: ubuntu-latest
-    if: github.event.issue.pull_request != ''
     steps:
       - name: Checkout
         uses: actions/checkout@v3
