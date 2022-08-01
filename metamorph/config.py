@@ -1,4 +1,3 @@
-from os import remove
 import yaml
 import re
 
@@ -46,7 +45,6 @@ class Config:
             direct[k]["extra"]["translator"] = self.translator
         if "translator_short" not in direct[k]["extra"]:
             direct[k]["extra"]["translator_short"] = remove_lower(self.translator)
- 
         if "language" not in direct[k]["extra"]:
             direct[k]["extra"]["language"] =  k
         if "result" not in direct[k]["extra"]:
@@ -84,7 +82,9 @@ class Config:
         return ret
 
 
-    def recursive_str_diagram(self,sub,kk,depth=1,lines=[],nodes="language",arrows=None,len_nodes=None,len_arrows=None):
+    def recursive_str_diagram(self,sub,kk,depth=1,lines=None,nodes="language",arrows=None,len_nodes=None,len_arrows=None):
+        if lines is None:
+            lines = []
         if len_arrows is None:
             len_arrows =0
             if  arrows is not None:
@@ -104,9 +104,9 @@ class Config:
             s = ("---" + tran +"--> " if depth !=1 else "") + node
             for i,k in enumerate(no_extra(sub[kk])):
                 if i == 0:
-                    s = s + "|" +""  
+                    s = s + "|"
                 else:
-                    for l in range(2):
+                    for _ in range(2):
                         s = s + "\n"
                         for j in range(depth):
                             s = s + (" "*(len_nodes) + "|" if j+1 in tlines else " "*(len_nodes+1))
@@ -115,4 +115,4 @@ class Config:
                 s = s + self.recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
             return s
         else:
-                return "---" + tran+ "--> " + node 
+                return "---" + tran+ "--> " + node

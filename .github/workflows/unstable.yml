@@ -8,16 +8,16 @@ on:
       - '*'
 
 jobs:
-    default:
+    unstable:
       runs-on: ubuntu-latest
       container:
         image: apnpucky/ubuntu-pip-lhapdf
       steps:
         - name: work around permission issue
-          run: git config --global --add safe.directory /__w/metamorph/metamorph
-        - uses: actions/checkout@v2
+          run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
+        - uses: actions/checkout@v3
           with:
-            fetch-depth: "0"
+            fetch-depth: 0
         - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
         - name: Build
           run: make build
@@ -39,7 +39,7 @@ jobs:
 #            coverage-reports: coverage.xml
         - name: Deploy Test PyPI
           if: startsWith(github.ref, 'refs/tags') != true
-          uses: pypa/gh-action-pypi-publish@master
+          uses: pypa/gh-action-pypi-publish@release/v1
           with:
             password: ${{ secrets.test_pypi_token }}
             repository_url: https://test.pypi.org/legacy/
