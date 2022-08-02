@@ -1,4 +1,4 @@
-name: Fast-Forward Test
+name: Fast-Forward
 
 on: 
   issue_comment:
