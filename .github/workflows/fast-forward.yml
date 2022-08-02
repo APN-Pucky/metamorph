@@ -18,5 +18,5 @@ jobs:
       - uses: APN-Pucky/fast-forward-action@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PAT: ${{ secrets.PAT }}
+          SSH_PRIVATE_KEY: ${{ secrets.ACTION_FF }}
 
