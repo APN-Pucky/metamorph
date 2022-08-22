@@ -77,7 +77,7 @@ metamorph -sd -gs en -c config.yaml
 
 ![DIAG](/img/diag.png)
 
-(`GoogleTranslate` gets abbreviated to `GT`)
+(`GoogleTranslate` gets abbreviated to only capital letters `GT`)
 
 [doc release]: https://apn-pucky.github.io/metamorph/index.html
 [doc test]: https://apn-pucky.github.io/metamorph/test/index.html
@@ -109,4 +109,3 @@ metamorph -sd -gs en -c config.yaml
 [rtd s l]: https://metamorph-apn.readthedocs.io/en/stable/?badge=stable
 [rtd t i]: https://readthedocs.org/projects/metamorph/badge/?version=latest
 [rtd t l]: https://metamorph-apn.readthedocs.io/en/latest/?badge=latest
-
