@@ -43,6 +43,7 @@ setuptools.setup(
             "sphinx_math_dollar",
             "pandoc",
             "sphinx",
+            "sphinx-autoapi",
             "nbsphinx",
             "sphinx_rtd_theme",
             "numpydoc",

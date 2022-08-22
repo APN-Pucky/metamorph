@@ -1,38 +1,25 @@
 #!/usr/bin/python3
 import deep_translator
 from deep_translator import * 
-from termcolor import colored
-import difflib
+
+
 import colorama
 import argparse
 import sys
-import pkg_resources as pkg
 
-from metamorph.config import Config, is_end, no_extra
-from metamorph.handler  import translate, recursive_translate
-
-package = "metamorph"
-
-try:
-    version = pkg.require(package)[0].version
-except pkg.DistributionNotFound:
-    version = "dirty"
+import metamorph
+from metamorph.config import Config,  no_extra
+from metamorph.handler import generate_alternatives, recursive_translate
+from metamorph.util import get_edits_string
 
 
-def get_edits_string(old, new):
-    result = ""
-    codes = difflib.SequenceMatcher(a=old, b=new).get_opcodes()
-    for code in codes:
-        if code[0] == "equal":
-            result += old[code[1]:code[2]]
-        elif code[0] == "insert":
-            result += colored(new[code[3]:code[4]],'green')
-        elif code[0] == "replace":
-            result += colored(new[code[3]:code[4]],'green')
-    return result
+
 
 def __main__():
-    parser = argparse.ArgumentParser(description='Metamorph-' + str(version) + ' text by passing through several translators.')
+    """
+    Main function.
+    """
+    parser = argparse.ArgumentParser(description='Metamorph-' + str(metamorph.version) + ' text by passing through several translators.')
     parser.add_argument("-gs","--goal-start",type=str, help="initial and final language", default="en")
     parser.add_argument("-g","--goal",type=str, help="final language", default=None)
     parser.add_argument("-s","--start",type=str, help="initial language", default=None)
@@ -74,10 +61,7 @@ def __main__():
         while True:
             print("Text:")
             to_translate = input()
-            s =[]
-            for k in no_extra(conf.flow):
-                conf.flow[k]["extra"]["result"] = to_translate
-                s = s + recursive_translate(conf,conf.flow,k)
+            s = generate_alternatives(to_translate, conf)
             for tmp_text in s:
                 if args.colour:
                     print(get_edits_string(to_translate,tmp_text))
