@@ -23,8 +23,8 @@ jobs:
           run: make build
         - name: Install
           run: make install
-#        - name: Tests
-#          run: make test
+        - name: Tests
+          run: make test
 #        - name: Build Sphinx
 #          working-directory: ./docs
 #          run: make html
