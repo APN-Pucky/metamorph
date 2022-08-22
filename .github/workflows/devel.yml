@@ -23,11 +23,11 @@ jobs:
           run: make install
         - name: Tests
           run: make test
-#        - name: Build Sphinx
-#          working-directory: ./docs
-#          run: make html
-#        - name: Report Coveralls
-#          uses: AndreMiras/coveralls-python-action@develop
+        - name: Build Sphinx
+          working-directory: ./docs
+          run: make html
+        - name: Report Coveralls
+          uses: AndreMiras/coveralls-python-action@develop
 #        - name: Report Codacy
 #          uses: codacy/codacy-coverage-reporter-action@v1
 #          with:
