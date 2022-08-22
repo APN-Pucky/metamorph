@@ -1,0 +1,24 @@
+:py:mod:`metamorph.util`
+========================
+
+.. py:module:: metamorph.util
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.util.get_edits_string
+
+
+
+.. py:function:: get_edits_string(old, new)
+
+   Colorize the differences between two strings.
+
+

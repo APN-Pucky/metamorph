@@ -1,0 +1,61 @@
+:py:mod:`metamorph.handler`
+===========================
+
+.. py:module:: metamorph.handler
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.handler.generate_alternatives
+   metamorph.handler.recursive_translate
+   metamorph.handler.translate
+
+
+
+.. py:function:: generate_alternatives(text, conf)
+
+   Generate alternatives for ``text`` using Config ``conf``.
+
+   :param text: Text to generate alternatives for.
+   :param conf: Config to use.
+   :return: List of alternatives.
+
+   Example::
+       >>> "Hello World!" in generate_alternatives("Hallo world!",Config(flow={"de":None,"fr":None,"es":None}))
+       True
+       >>> "Hallo Welt!" in generate_alternatives("Hello world!",Config(start="de",goal="de",flow={"en":None,"fr":None,"es":None}))
+       True
+       >>> "Hello World!" in generate_alternatives("Hallo world!",Config("default_config.yaml"))
+       True
+
+
+.. py:function:: recursive_translate(conf, sub, kk)
+
+   Recursively translate ``sub`` using Config ``conf``.
+
+
+.. py:function:: translate(translator, source, target, text, quiet=False, verbose=True)
+
+   Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
+   :param translator: Translator to use (from :mod:`deep_translator`).
+
+   :param source: Source language.
+   :param target: Target language.
+   :param text: Text to translate.
+   :param quiet: If ``True``, don't print anything.
+   :param verbose: If ``True``, print error messages.
+
+   :return: Translated text.
+
+   Example::
+       >>> translate(GoogleTranslator, "en", "de", "Hello world!")
+       'Hallo Welt!'
+
+

@@ -1,0 +1,125 @@
+:py:mod:`metamorph`
+===================
+
+.. py:module:: metamorph
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   config/index.rst
+   handler/index.rst
+   main/index.rst
+   util/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.Config
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.generate_alternatives
+   metamorph.translate
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.package
+   metamorph.version
+
+
+.. py:function:: generate_alternatives(text, conf)
+
+   Generate alternatives for ``text`` using Config ``conf``.
+
+   :param text: Text to generate alternatives for.
+   :param conf: Config to use.
+   :return: List of alternatives.
+
+   Example::
+       >>> "Hello World!" in generate_alternatives("Hallo world!",Config(flow={"de":None,"fr":None,"es":None}))
+       True
+       >>> "Hallo Welt!" in generate_alternatives("Hello world!",Config(start="de",goal="de",flow={"en":None,"fr":None,"es":None}))
+       True
+       >>> "Hello World!" in generate_alternatives("Hallo world!",Config("default_config.yaml"))
+       True
+
+
+.. py:function:: translate(translator, source, target, text, quiet=False, verbose=True)
+
+   Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
+   :param translator: Translator to use (from :mod:`deep_translator`).
+
+   :param source: Source language.
+   :param target: Target language.
+   :param text: Text to translate.
+   :param quiet: If ``True``, don't print anything.
+   :param verbose: If ``True``, print error messages.
+
+   :return: Translated text.
+
+   Example::
+       >>> translate(GoogleTranslator, "en", "de", "Hello world!")
+       'Hallo Welt!'
+
+
+.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', flow=None)
+
+   Defines the language flow to generate alternative texts.
+
+   .. py:method:: load_file(file: str)
+
+      Loads a configuration file.
+
+
+   .. py:method:: default_extra(direct, k)
+
+      Adds default keys to dictionary at ``direct[k]``.
+
+
+   .. py:method:: fill_missing(direct)
+
+      Sets default extras for missing elements in dictionary.
+
+
+   .. py:method:: str_diagram(nodes='language', arrows=None)
+
+      Prints a diagram of the language flow.
+
+
+   .. py:method:: _recursive_get_str_max_length(sub, key)
+
+
+   .. py:method:: _recursive_str_diagram(sub, kk, depth=1, lines=None, nodes='language', arrows=None, len_nodes=None, len_arrows=None)
+
+
+
+.. py:data:: package
+   :annotation: = metamorph
+
+   
+
+.. py:data:: version
+   
+
+   
+

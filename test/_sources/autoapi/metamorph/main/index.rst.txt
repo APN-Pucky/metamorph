@@ -1,0 +1,24 @@
+:py:mod:`metamorph.main`
+========================
+
+.. py:module:: metamorph.main
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.main.__main__
+
+
+
+.. py:function:: __main__()
+
+   Main function.
+
+

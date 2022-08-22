@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>metamorph.handler &mdash; metamorph  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> metamorph
+          </a>
+              <div class="version">
+                0.0.9-128-gda42706
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/metamorph/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/metamorph/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/metamorph">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/metamorph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metamorph</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">metamorph</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../metamorph.html">metamorph</a> &raquo;</li>
+      <li>metamorph.handler</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for metamorph.handler</h1><div class="highlight"><pre>
+<span></span>import deep_translator
+from deep_translator import * 
+from metamorph.config import Config, is_end, no_extra
+import sys
+
+
+<div class="viewcode-block" id="generate_alternatives"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.handler.generate_alternatives">[docs]</a>def generate_alternatives(text,conf):
+    &quot;&quot;&quot;
+    Generate alternatives for ``text`` using Config ``conf``.
+
+    :param text: Text to generate alternatives for.
+    :param conf: Config to use.
+    :return: List of alternatives.
+
+    Example::
+        &gt;&gt;&gt; &quot;Hello World!&quot; in generate_alternatives(&quot;Hallo world!&quot;,Config(flow={&quot;de&quot;:None,&quot;fr&quot;:None,&quot;es&quot;:None}))
+	True
+        &gt;&gt;&gt; &quot;Hallo Welt!&quot; in generate_alternatives(&quot;Hello world!&quot;,Config(start=&quot;de&quot;,goal=&quot;de&quot;,flow={&quot;en&quot;:None,&quot;fr&quot;:None,&quot;es&quot;:None}))
+	True
+        &gt;&gt;&gt; &quot;Hello World!&quot; in generate_alternatives(&quot;Hallo world!&quot;,Config(&quot;default_config.yaml&quot;))
+	True
+    &quot;&quot;&quot;
+    s =[]
+    for k in no_extra(conf.flow):
+	# We set the extra of the start node to the text we want to translate.
+        conf.flow[k][&quot;extra&quot;][&quot;result&quot;] = text
+        s = s + recursive_translate(conf,conf.flow,k)
+    return s</div>
+
+
+<div class="viewcode-block" id="recursive_translate"><a class="viewcode-back" href="../../autoapi/metamorph/handler/index.html#metamorph.handler.recursive_translate">[docs]</a>def recursive_translate(conf,sub,kk):
+    &quot;&quot;&quot;
+    Recursively translate ``sub`` using Config ``conf``.
+    &quot;&quot;&quot;
+    ret = []
+    # We recurse over everything except the end nodes.
+    if not is_end(sub[kk]):
+        text = sub[kk][&quot;extra&quot;][&quot;result&quot;]
+        source = sub[kk][&quot;extra&quot;][&quot;language&quot;]
+	# Iterate elements of 
+        for _,k in enumerate(no_extra(sub[kk])):
+            target = sub[kk][k][&quot;extra&quot;][&quot;language&quot;]
+	    # infer deep_translator from string
+            t = getattr(sys.modules[__name__], sub[kk][k][&quot;extra&quot;][&quot;translator&quot;])
+	    # save the translated text in the extra field of the node
+            sub[kk][k][&quot;extra&quot;][&quot;result&quot;] = translate(t,source ,target,text)
+	    # append result to the list of results from end nodes
+            ret = ret + recursive_translate(conf,sub[kk],k)
+        return ret
+    else:
+	# Return the result of the end node.
+        return [sub[kk][&quot;extra&quot;][&quot;result&quot;]]</div>
+
+
+<div class="viewcode-block" id="translate"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.handler.translate">[docs]</a>def translate(translator,source,target,text,quiet=False,verbose=True):
+    &quot;&quot;&quot;
+    Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
+    :param translator: Translator to use (from :mod:`deep_translator`).
+
+    :param source: Source language.
+    :param target: Target language.
+    :param text: Text to translate.
+    :param quiet: If ``True``, don&#39;t print anything.
+    :param verbose: If ``True``, print error messages.
+
+    :return: Translated text.
+
+    Example::
+        &gt;&gt;&gt; translate(GoogleTranslator, &quot;en&quot;, &quot;de&quot;, &quot;Hello world!&quot;)
+	&#39;Hallo Welt!&#39;
+    &quot;&quot;&quot;
+    try:
+        return translator(source=source,target=target).translate(text)
+    except deep_translator.exceptions.LanguageNotSupportedException as e:
+        if not quiet:
+            print(e)
+    except Exception as e:
+        if verbose:
+            print(e)
+    return &quot;&quot;</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

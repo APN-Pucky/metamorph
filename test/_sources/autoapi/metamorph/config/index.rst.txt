@@ -1,0 +1,82 @@
+:py:mod:`metamorph.config`
+==========================
+
+.. py:module:: metamorph.config
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.config.Config
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.config.is_end
+   metamorph.config.no_extra
+   metamorph.config.remove_lower
+
+
+
+.. py:function:: is_end(dic)
+
+   Returns True if dictionary is an end node.
+
+
+.. py:function:: no_extra(dic)
+
+   Returns keys of dictionary that are not 'extra'.
+
+
+.. py:function:: remove_lower(text: str)
+
+   Remove lowercase letters from ``text``.
+
+   :param text: Text to remove lowercase letters from.
+   :return: Text without lowercase letters.
+
+   Example::
+       >>> remove_lower("GoogleTranslate")
+       'GT'
+
+
+.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', flow=None)
+
+   Defines the language flow to generate alternative texts.
+
+   .. py:method:: load_file(file: str)
+
+      Loads a configuration file.
+
+
+   .. py:method:: default_extra(direct, k)
+
+      Adds default keys to dictionary at ``direct[k]``.
+
+
+   .. py:method:: fill_missing(direct)
+
+      Sets default extras for missing elements in dictionary.
+
+
+   .. py:method:: str_diagram(nodes='language', arrows=None)
+
+      Prints a diagram of the language flow.
+
+
+   .. py:method:: _recursive_get_str_max_length(sub, key)
+
+
+   .. py:method:: _recursive_str_diagram(sub, kk, depth=1, lines=None, nodes='language', arrows=None, len_nodes=None, len_arrows=None)
+
+
+
