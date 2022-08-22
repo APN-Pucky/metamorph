@@ -13,6 +13,7 @@ def generate_alternatives(text,conf):
     :return: List of alternatives.
 
     Example::
+	>>> from metamorph.config import Config
         >>> "Hello World!" in generate_alternatives("Hallo world!",Config(flow={"de":None,"fr":None,"es":None}))
 	True
         >>> "Hallo Welt!" in generate_alternatives("Hello world!",Config(start="de",goal="de",flow={"en":None,"fr":None,"es":None}))
