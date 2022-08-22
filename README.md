@@ -6,8 +6,6 @@ First line is the input followed by colorized suggestions.
 
 Doc: `metamorph --help`
 
-(Work-in-progress: Doc: https://apn-pucky.github.io/metamorph/index.html )
-
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/metamorph.svg) 
 
 | [Stable][doc release]        | [Unstable][doc test]           |
@@ -17,6 +15,11 @@ Doc: `metamorph --help`
 | [![Codacy Badge][cc s c i]][cc s c l]      |[![Codacy Badge][cc c i]][cc c l] | 
 | [![Codacy Badge][cc s q i]][cc s q l]     |[![Codacy Badge][cc q i]][cc q l] | 
 | [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
+
+## Documentation
+
+-   <https://metamorph-apn.readthedocs.io/en/stable/>
+-   <https://apn-pucky.github.io/metamorph/index.html>
 
 ## Versions
 
