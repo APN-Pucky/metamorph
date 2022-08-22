@@ -38,16 +38,6 @@ Functions
 
 
 
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   metamorph.package
-   metamorph.version
-   metamorph.__version__
-
-
 .. py:function:: generate_alternatives(text, conf)
 
    Generate alternatives for ``text`` using Config ``conf``.
@@ -114,19 +104,4 @@ Attributes
    .. py:method:: _recursive_str_diagram(sub, kk, depth=1, lines=None, nodes='language', arrows=None, len_nodes=None, len_arrows=None)
 
 
-
-.. py:data:: package
-   :annotation: = metamorph
-
-   
-
-.. py:data:: version
-   
-
-   
-
-.. py:data:: __version__
-   
-
-   
 
