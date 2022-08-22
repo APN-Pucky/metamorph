@@ -17,6 +17,19 @@ Functions
 
 
 
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.main.get_edits_string
+
+
+.. py:data:: get_edits_string
+   
+
+   
+
 .. py:function:: __main__()
 
    Main function.
