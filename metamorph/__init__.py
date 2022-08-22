@@ -9,3 +9,5 @@ try:
     version = pkg.require(package)[0].version
 except pkg.DistributionNotFound:
     version = "dirty"
+
+__version__ = version

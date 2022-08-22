@@ -9,16 +9,13 @@ import sys
 try:
     import readline
 except ImportError:
-    pass 
+    pass
 # colorama might not be available on all platforms
 try:
     import colorama
     from metamorph.util import get_edits_string
 except ImportError:
     get_edits_string = lambda old, new: new
-    pass 
-
-
 
 import metamorph
 from metamorph.config import Config
@@ -85,6 +82,7 @@ def __main__():
                 print(conf.str_diagram(nodes="result",arrows="language"))
     except KeyboardInterrupt:
         sys.exit(0)
+
 
 if __name__ == "__main__":
     __main__()

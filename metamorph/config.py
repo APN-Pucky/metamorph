@@ -35,7 +35,7 @@ class Config:
     """
     Defines the language flow to generate alternative texts.
     """
-    def __init__(self,file:str=None, start = "en", goal = "en",translator="GoogleTranslator", flow = None,):
+    def __init__(self,file:str = None, start = "en", goal = "en",translator = "GoogleTranslator", flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -146,7 +146,8 @@ class Config:
                             s = s + (" "*(len_nodes) + "|" if j+1 in tlines else " "*(len_nodes+1))
                             if j < depth-1:
                                 s = s + " "*(len_arrows+7)
-                s = s + self._recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
+                s = s + self._recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,
+                    len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
             return s
         else:
                 return "---" + tran+ "--> " + node
