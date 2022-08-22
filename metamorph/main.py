@@ -3,14 +3,26 @@ import deep_translator
 from deep_translator import * 
 
 
-import colorama
 import argparse
 import sys
+# readline might not be available on all platforms
+try:
+    import readline
+except:
+    pass 
+# colorama might not be available on all platforms
+try:
+    import colorama
+    from metamorph.util import get_edits_string
+except:
+    get_edits_string = lambda old, new: new
+    pass 
+
+
 
 import metamorph
 from metamorph.config import Config,  no_extra
 from metamorph.handler import generate_alternatives, recursive_translate
-from metamorph.util import get_edits_string
 
 
 
