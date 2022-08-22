@@ -69,22 +69,26 @@ def __main__():
         print("Loaded translation diagram:")
         print(conf.str_diagram(nodes="language" ,arrows="translator_short"))
 
-    while True:
-        print("Text:")
-        to_translate = input()
-        s =[]
-        for k in no_extra(conf.flow):
-            conf.flow[k]["extra"]["result"] = to_translate
-            s = s + recursive_translate(conf,conf.flow,k)
-        for tmp_text in s:
-            if args.colour:
-                print(get_edits_string(to_translate,tmp_text))
-            else:
-                print(tmp_text)
-        print()
-        if args.show_diagrams or args.show_diagram_result:
-            print("Diagram:")
-            print(conf.str_diagram(nodes="result",arrows="language"))
+    try:
+        while True:
+            print("Text:")
+            to_translate = input()
+            s =[]
+            for k in no_extra(conf.flow):
+                conf.flow[k]["extra"]["result"] = to_translate
+                s = s + recursive_translate(conf,conf.flow,k)
+            for tmp_text in s:
+                if args.colour:
+                    print(get_edits_string(to_translate,tmp_text))
+                else:
+                    print(tmp_text)
+            print()
+            if args.show_diagrams or args.show_diagram_result:
+                print("Diagram:")
+                print(conf.str_diagram(nodes="result",arrows="language"))
+    except KeyboardInterrupt:
+        sys.exit(0)
+
             
 def translate(trans,source,target,text,quiet=False,verbose=True):
     try:
