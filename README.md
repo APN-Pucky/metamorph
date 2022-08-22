@@ -13,7 +13,10 @@ Doc: `metamorph --help`
 | [Stable][doc release]        | [Unstable][doc test]           |
 | ------------- |:-------------:|
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
+| [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
 | [![Codacy Badge][cc s q i]][cc s q l]     |[![Codacy Badge][cc q i]][cc q l] | 
+| [![Codacy Badge][cc s q i]][cc s q l]      |[![Codacy Badge][cc q i]][cc q l] | 
+| [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
 
 ## Versions
 
@@ -86,5 +89,21 @@ metamorph -sd -gs en -c config.yaml
 
 [cc s q i]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34?branch=stable
 [cc s q l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade?branch=stable
+[cc s c i]: https://app.codacy.com/project/badge/Coverage/1acfcad112734b1ca875518cf1eeda34?branch=stable
+[cc s c l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&utm_medium=referral&utm_content=APN-Pucky/HEPi&utm_campaign=Badge_Coverage?branch=stable
+
 [cc q i]: https://app.codacy.com/project/badge/Grade/1acfcad112734b1ca875518cf1eeda34
 [cc q l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/metamorph&amp;utm_campaign=Badge_Grade
+[cc c i]: https://app.codacy.com/project/badge/Coverage/1acfcad112734b1ca875518cf1eeda34
+[cc c l]: https://www.codacy.com/gh/APN-Pucky/metamorph/dashboard?utm_source=github.com&utm_medium=referral&utm_content=APN-Pucky/HEPi&utm_campaign=Badge_Coverage
+
+[c s i]: https://coveralls.io/repos/github/APN-Pucky/metamorph/badge.svg?branch=stable
+[c s l]: https://coveralls.io/github/APN-Pucky/metamorph?branch=stable
+[c t l]: https://coveralls.io/github/APN-Pucky/metamorph?branch=master
+[c t i]: https://coveralls.io/repos/github/APN-Pucky/metamorph/badge.svg?branch=master
+
+[rtd s i]: https://readthedocs.org/projects/metamorph/badge/?version=stable
+[rtd s l]: https://metamorph-apn.readthedocs.io/en/stable/?badge=stable
+[rtd t i]: https://readthedocs.org/projects/metamorph/badge/?version=latest
+[rtd t l]: https://metamorph-apn.readthedocs.io/en/latest/?badge=latest
+
