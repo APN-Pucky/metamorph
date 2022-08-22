@@ -12,7 +12,7 @@ build:
 
 test:
 	rm -f .coverage coverage.xml
-	pytest 
+	pytest metamorph
 
 commit: 
 	-git add .
