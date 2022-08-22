@@ -45,6 +45,7 @@ Attributes
 
    metamorph.package
    metamorph.version
+   metamorph.__version__
 
 
 .. py:function:: generate_alternatives(text, conf)
@@ -120,6 +121,11 @@ Attributes
    
 
 .. py:data:: version
+   
+
+   
+
+.. py:data:: __version__
    
 
    

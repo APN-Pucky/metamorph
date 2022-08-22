@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-4-gdc77b3c
+                0.0.11-5-g100be41
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -116,7 +116,7 @@ import re
     &quot;&quot;&quot;
     Defines the language flow to generate alternative texts.
     &quot;&quot;&quot;
-    def __init__(self,file:str=None, start = &quot;en&quot;, goal = &quot;en&quot;,translator=&quot;GoogleTranslator&quot;, flow = None,):
+    def __init__(self,file:str = None, start = &quot;en&quot;, goal = &quot;en&quot;,translator = &quot;GoogleTranslator&quot;, flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -227,7 +227,8 @@ import re
                             s = s + (&quot; &quot;*(len_nodes) + &quot;|&quot; if j+1 in tlines else &quot; &quot;*(len_nodes+1))
                             if j &lt; depth-1:
                                 s = s + &quot; &quot;*(len_arrows+7)
-                s = s + self._recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
+                s = s + self._recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,
+                    len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
             return s
         else:
                 return &quot;---&quot; + tran+ &quot;--&gt; &quot; + node</div></div>

@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-4-gdc77b3c
+                0.0.11-5-g100be41
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -90,16 +90,13 @@ import sys
 try:
     import readline
 except ImportError:
-    pass 
+    pass
 # colorama might not be available on all platforms
 try:
     import colorama
     from metamorph.util import get_edits_string
 except ImportError:
 <div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/main/index.html#metamorph.main.get_edits_string">[docs]</a>    get_edits_string = lambda old, new: new</div>
-    pass 
-
-
 
 import metamorph
 from metamorph.config import Config
@@ -166,6 +163,7 @@ from metamorph.handler import generate_alternatives
                 print(conf.str_diagram(nodes=&quot;result&quot;,arrows=&quot;language&quot;))
     except KeyboardInterrupt:
         sys.exit(0)</div>
+
 
 if __name__ == &quot;__main__&quot;:
     __main__()
