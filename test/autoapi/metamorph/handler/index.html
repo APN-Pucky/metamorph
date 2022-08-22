@@ -32,7 +32,7 @@
             <a href="../../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-1-g2170043
+                0.0.11-4-gdc77b3c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -122,7 +122,8 @@
 </dd>
 </dl>
 <dl>
-<dt>Example::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Hello World!&quot;</span> <span class="ow">in</span> <span class="n">generate_alternatives</span><span class="p">(</span><span class="s2">&quot;Hallo world!&quot;</span><span class="p">,</span><span class="n">Config</span><span class="p">(</span><span class="n">flow</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;de&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s2">&quot;fr&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s2">&quot;es&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}))</span>
+<dt>Example::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metamorph.config</span> <span class="kn">import</span> <span class="n">Config</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Hello World!&quot;</span> <span class="ow">in</span> <span class="n">generate_alternatives</span><span class="p">(</span><span class="s2">&quot;Hallo world!&quot;</span><span class="p">,</span><span class="n">Config</span><span class="p">(</span><span class="n">flow</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;de&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s2">&quot;fr&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s2">&quot;es&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}))</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Hallo Welt!&quot;</span> <span class="ow">in</span> <span class="n">generate_alternatives</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span><span class="n">Config</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;de&quot;</span><span class="p">,</span><span class="n">goal</span><span class="o">=</span><span class="s2">&quot;de&quot;</span><span class="p">,</span><span class="n">flow</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;en&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s2">&quot;fr&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s2">&quot;es&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}))</span>
 <span class="go">True</span>

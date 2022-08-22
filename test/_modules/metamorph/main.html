@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-1-g2170043
+                0.0.11-4-gdc77b3c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -89,21 +89,21 @@ import sys
 # readline might not be available on all platforms
 try:
     import readline
-except:
+except ImportError:
     pass 
 # colorama might not be available on all platforms
 try:
     import colorama
     from metamorph.util import get_edits_string
-except:
+except ImportError:
 <div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/main/index.html#metamorph.main.get_edits_string">[docs]</a>    get_edits_string = lambda old, new: new</div>
     pass 
 
 
 
 import metamorph
-from metamorph.config import Config,  no_extra
-from metamorph.handler import generate_alternatives, recursive_translate
+from metamorph.config import Config
+from metamorph.handler import generate_alternatives
 
 
 
