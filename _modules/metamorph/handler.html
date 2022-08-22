@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11
+                0.0.11-7-gbcede9c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -68,7 +68,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../metamorph.html">metamorph</a> &raquo;</li>
       <li>metamorph.handler</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -80,8 +79,8 @@
              
   <h1>Source code for metamorph.handler</h1><div class="highlight"><pre>
 <span></span>import deep_translator
-from deep_translator import * 
-from metamorph.config import Config, is_end, no_extra
+from deep_translator import *
+from metamorph.config import is_end, no_extra
 import sys
 
 
@@ -94,6 +93,7 @@ import sys
     :return: List of alternatives.
 
     Example::
+	&gt;&gt;&gt; from metamorph.config import Config
         &gt;&gt;&gt; &quot;Hello World!&quot; in generate_alternatives(&quot;Hallo world!&quot;,Config(flow={&quot;de&quot;:None,&quot;fr&quot;:None,&quot;es&quot;:None}))
 	True
         &gt;&gt;&gt; &quot;Hallo Welt!&quot; in generate_alternatives(&quot;Hello world!&quot;,Config(start=&quot;de&quot;,goal=&quot;de&quot;,flow={&quot;en&quot;:None,&quot;fr&quot;:None,&quot;es&quot;:None}))
@@ -118,7 +118,7 @@ import sys
     if not is_end(sub[kk]):
         text = sub[kk][&quot;extra&quot;][&quot;result&quot;]
         source = sub[kk][&quot;extra&quot;][&quot;language&quot;]
-	# Iterate elements of 
+	# Iterate elements of subnodes
         for _,k in enumerate(no_extra(sub[kk])):
             target = sub[kk][k][&quot;extra&quot;][&quot;language&quot;]
 	    # infer deep_translator from string

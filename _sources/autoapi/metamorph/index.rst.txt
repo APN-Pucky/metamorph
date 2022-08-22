@@ -38,15 +38,6 @@ Functions
 
 
 
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   metamorph.package
-   metamorph.version
-
-
 .. py:function:: generate_alternatives(text, conf)
 
    Generate alternatives for ``text`` using Config ``conf``.
@@ -56,6 +47,7 @@ Attributes
    :return: List of alternatives.
 
    Example::
+       >>> from metamorph.config import Config
        >>> "Hello World!" in generate_alternatives("Hallo world!",Config(flow={"de":None,"fr":None,"es":None}))
        True
        >>> "Hallo Welt!" in generate_alternatives("Hello world!",Config(start="de",goal="de",flow={"en":None,"fr":None,"es":None}))
@@ -112,14 +104,4 @@ Attributes
    .. py:method:: _recursive_str_diagram(sub, kk, depth=1, lines=None, nodes='language', arrows=None, len_nodes=None, len_arrows=None)
 
 
-
-.. py:data:: package
-   :annotation: = metamorph
-
-   
-
-.. py:data:: version
-   
-
-   
 

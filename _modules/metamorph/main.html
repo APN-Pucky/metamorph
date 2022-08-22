@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11
+                0.0.11-7-gbcede9c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -68,7 +68,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../metamorph.html">metamorph</a> &raquo;</li>
       <li>metamorph.main</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -88,22 +87,20 @@ import argparse
 import sys
 # readline might not be available on all platforms
 try:
+    # noinspection PyUnresolvedReferences
     import readline
-except:
-    pass 
+except ImportError:
+    pass
 # colorama might not be available on all platforms
 try:
     import colorama
     from metamorph.util import get_edits_string
-except:
+except ImportError:
 <div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/main/index.html#metamorph.main.get_edits_string">[docs]</a>    get_edits_string = lambda old, new: new</div>
-    pass 
-
-
 
 import metamorph
-from metamorph.config import Config,  no_extra
-from metamorph.handler import generate_alternatives, recursive_translate
+from metamorph.config import Config
+from metamorph.handler import generate_alternatives
 
 
 
@@ -166,6 +163,7 @@ from metamorph.handler import generate_alternatives, recursive_translate
                 print(conf.str_diagram(nodes=&quot;result&quot;,arrows=&quot;language&quot;))
     except KeyboardInterrupt:
         sys.exit(0)</div>
+
 
 if __name__ == &quot;__main__&quot;:
     __main__()

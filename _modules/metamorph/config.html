@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11
+                0.0.11-7-gbcede9c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -68,7 +68,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../metamorph.html">metamorph</a> &raquo;</li>
       <li>metamorph.config</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -116,7 +115,7 @@ import re
     &quot;&quot;&quot;
     Defines the language flow to generate alternative texts.
     &quot;&quot;&quot;
-    def __init__(self,file:str=None, start = &quot;en&quot;, goal = &quot;en&quot;,translator=&quot;GoogleTranslator&quot;, flow = None,):
+    def __init__(self,file:str = None, start = &quot;en&quot;, goal = &quot;en&quot;,translator = &quot;GoogleTranslator&quot;, flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -133,7 +132,7 @@ import re
 
 <div class="viewcode-block" id="Config.load_file"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.load_file">[docs]</a>    def load_file(self,file:str):
         &quot;&quot;&quot;
-        Loads a configuration file. 
+        Loads a configuration file.
         &quot;&quot;&quot;
         with open(file, &#39;r&#39;) as file:
             conf = yaml.safe_load(file)
@@ -227,7 +226,8 @@ import re
                             s = s + (&quot; &quot;*(len_nodes) + &quot;|&quot; if j+1 in tlines else &quot; &quot;*(len_nodes+1))
                             if j &lt; depth-1:
                                 s = s + &quot; &quot;*(len_arrows+7)
-                s = s + self._recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
+                s = s + self._recursive_str_diagram(sub[kk],k,depth=depth+1,nodes=nodes,arrows=arrows,
+                    len_nodes=len_nodes,len_arrows=len_arrows,lines=tlines if i+1 != len(no_extra(sub[kk])) else lines)
             return s
         else:
                 return &quot;---&quot; + tran+ &quot;--&gt; &quot; + node</div></div>
