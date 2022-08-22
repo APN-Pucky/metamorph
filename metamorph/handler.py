@@ -1,6 +1,6 @@
 import deep_translator
-from deep_translator import * 
-from metamorph.config import Config, is_end, no_extra
+from deep_translator import *
+from metamorph.config import is_end, no_extra
 import sys
 
 
@@ -37,7 +37,7 @@ def recursive_translate(conf,sub,kk):
     if not is_end(sub[kk]):
         text = sub[kk]["extra"]["result"]
         source = sub[kk]["extra"]["language"]
-	# Iterate elements of 
+	# Iterate elements of subnodes
         for _,k in enumerate(no_extra(sub[kk])):
             target = sub[kk][k]["extra"]["language"]
 	    # infer deep_translator from string

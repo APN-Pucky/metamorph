@@ -52,7 +52,7 @@ class Config:
 
     def load_file(self,file:str):
         """
-        Loads a configuration file. 
+        Loads a configuration file.
         """
         with open(file, 'r') as file:
             conf = yaml.safe_load(file)
