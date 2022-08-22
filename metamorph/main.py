@@ -9,6 +9,7 @@ import sys
 import pkg_resources as pkg
 
 from metamorph.config import Config, is_end, no_extra
+from metamorph.handler  import translate, recursive_translate
 
 package = "metamorph"
 
@@ -89,31 +90,5 @@ def __main__():
     except KeyboardInterrupt:
         sys.exit(0)
 
-            
-def translate(trans,source,target,text,quiet=False,verbose=True):
-    try:
-        return trans(source=source,target=target).translate(text)
-    except deep_translator.exceptions.LanguageNotSupportedException as e:
-        if not quiet:
-            print(e)
-    except Exception as e:
-        if verbose:
-            print(e)
-    return ""
-
-def recursive_translate(conf,sub,kk):
-    ret = []
-    if not is_end(sub[kk]):
-        text = sub[kk]["extra"]["result"]
-        source = sub[kk]["extra"]["language"]
-        for _,k in enumerate(no_extra(sub[kk])):
-            target = sub[kk][k]["extra"]["language"]
-            t = getattr(sys.modules[__name__], sub[kk][k]["extra"]["translator"])
-            sub[kk][k]["extra"]["result"] = translate(t,source ,target,text)
-            ret = ret + recursive_translate(conf,sub[kk],k)
-        return ret
-    else:
-        return [sub[kk]["extra"]["result"]]
-
-
-__main__()
+if __name__ == "__main__":
+    __main__()

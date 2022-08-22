@@ -2,9 +2,16 @@ import yaml
 import re
 
 def is_end(dic):
+    """
+    Returns True if dictionary is an end node.
+    """
     b = dic is None or (len(dic.keys()) == 1 and 'extra' in dic.keys())
     return b
+
 def no_extra(dic):
+    """
+    Returns keys of dictionary that are not 'extra'.
+    """
     r = []
     for k in dic.keys():
         if k != "extra":
@@ -14,9 +21,7 @@ def no_extra(dic):
 remove_lower = lambda text: re.sub('[a-z]', '', text)
 
 class Config:
-    def __init__(self,file:str=None, start = None, goal = None ,translator=None, flow = None,):
-        if file is not None:
-            self.load_file(file)
+    def __init__(self,file:str=None, start = "en", goal = "en",translator="GoogleTranslator", flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -25,6 +30,8 @@ class Config:
             self.flow = flow
         if translator is not None:
             self.translator = translator
+        if file is not None:
+            self.load_file(file)
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
@@ -38,7 +45,11 @@ class Config:
                 self.goal = conf['goal']
             if 'start' in conf:
                 self.start = conf['start']
+
     def default_extra(self,direct,k):
+        """
+        Adds default keys to dictionary.
+        """
         if "extra" not in direct[k]:
             direct[k]["extra"] = {}
         if "translator" not in direct[k]["extra"]:

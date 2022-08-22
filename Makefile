@@ -12,7 +12,7 @@ build:
 
 test:
 	rm -f .coverage coverage.xml
-	pytest hepi
+	pytest 
 
 commit: 
 	-git add .

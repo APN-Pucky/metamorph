@@ -34,7 +34,7 @@ pip install --index-url https://test.pypi.org/simple/ metamorph [--user] [--upgr
 For a list of parameters run `metamorph -h`.
 
 The root node `flow` can have multiple different starting languages (given `start` is None).
-```yml
+```yaml
 translator: "GoogleTranslator"
 start: "de"
 goal: "de"
@@ -63,10 +63,10 @@ flow:
   sv:
 ```
 
-This exemplary config.yml will produce following results (note `-sd` for diagrams and `-c` for config, while most command line parameters take precedence over config (`-gs` here)).
+This exemplary config.yaml will produce following results (note `-sd` for diagrams and `-c` for config, while most command line parameters take precedence over config (`-gs` here)).
 
 ```sh
-metamorph -sd -gs en -c config.yml
+metamorph -sd -gs en -c config.yaml
 ```
 
 ![DIAG](/img/diag.png)

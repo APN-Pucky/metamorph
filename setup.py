@@ -27,6 +27,28 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
+    extras_require={
+        'dev': [
+            "build",
+            "pytest",
+            "pytest-cov",
+            "pytest-profiling",
+            "pytest-line-profiler-apn>=0.1.3",
+            "jupyterlab",
+            "pandas",
+            "ipython",
+        ],
+        'docs': [
+            "jupyter-sphinx",
+            "sphinx_math_dollar",
+            "pandoc",
+            "sphinx",
+            "nbsphinx",
+            "sphinx_rtd_theme",
+            "numpydoc",
+            "sphinx-autobuild",
+        ]
+    },
     version_config={
         "template": "{tag}",
         "dev_template": "{tag}.{ccount}",
