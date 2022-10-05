@@ -47,11 +47,18 @@ Functions
    Example::
        >>> remove_lower("GoogleTranslate")
        'GT'
+       >>> remove_lower({"GoogleTranslate":"XXX"})
+       {'GT': 'XXX'}
 
 
-.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', flow=None)
+.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', api_keys=None, flow=None)
 
    Defines the language flow to generate alternative texts.
+
+   .. py:method:: get_api_key(translator)
+
+      Returns the api key for ``translator``.
+
 
    .. py:method:: load_file(file: str)
 
