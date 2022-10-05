@@ -62,7 +62,7 @@ class Config:
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
-        print(json.dumps(self.flow,indent=4))
+        #print(json.dumps(self.flow,indent=4))
 
     def get_api_key(self,translator):
         """
@@ -97,7 +97,7 @@ class Config:
         if "extra" not in direct[k]:
             direct[k]["extra"] = {}
         if "translator" not in direct[k]["extra"]:
-            print("overwritte",k,direct[k],direct[k]["extra"] )
+            #print("overwritte",k,direct[k],direct[k]["extra"] )
             direct[k]["extra"]["translator"] = self.translator
         if "translator_short" not in direct[k]["extra"]:
             direct[k]["extra"]["translator_short"] = remove_lower(direct[k]["extra"]["translator"])
