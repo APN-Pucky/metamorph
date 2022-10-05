@@ -28,14 +28,21 @@ def remove_lower(text:str):
     Example::
         >>> remove_lower("GoogleTranslate")
         'GT'
+        >>> remove_lower({"GoogleTranslate":"XXX"})
+        {'GT': 'XXX'}
     """
+    if type(text) is dict:
+        r = {}
+        for k,v in text.items():
+            r[remove_lower(k)] = v
+        return r
     return re.sub('[a-z]', '', text)
 
 class Config:
     """
     Defines the language flow to generate alternative texts.
     """
-    def __init__(self,file:str = None, start = "en", goal = "en",translator = "GoogleTranslator", flow = None,):
+    def __init__(self,file:str = None, start = "en", goal = "en",translator = "GoogleTranslator", api_keys=None, flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -44,11 +51,24 @@ class Config:
             self.flow = flow
         if translator is not None:
             self.translator = translator
+        if api_keys is not None:
+            self.api_keys = api_keys
+        else:
+            self.api_keys = {}
         if file is not None:
             self.load_file(file)
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
+
+    def get_api_key(self,translator):
+        """
+        Returns the api key for ``translator``.
+        """
+        if translator in self.api_keys:
+            return self.api_keys[translator]
+        #print("No api key for translator " + translator + " found.")
+        return None
 
     def load_file(self,file:str):
         """
@@ -57,6 +77,9 @@ class Config:
         with open(file, 'r') as file:
             conf = yaml.safe_load(file)
             self.translator= conf['translator']
+            if 'api_keys' in conf:
+                print("init")
+                self.api_keys = conf['api_keys']
             self.flow = conf['flow']
             if 'goal' in conf:
                 self.goal = conf['goal']

@@ -1,6 +1,9 @@
 translator: "GoogleTranslator"
 start: "de"
 goal: "de"
+api_keys:
+  GoogleTranslator: "XXX"
+  DeeplTranslator: "XXX"
 
 flow:
   de:

@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-import deep_translator
-from deep_translator import * 
-
-
 import argparse
 import sys
 # readline might not be available on all platforms
@@ -35,6 +31,9 @@ def __main__():
     parser.add_argument("-t","--translator", type=str,help="default translator (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )",default="GoogleTranslator")
     parser.add_argument("-l","--languages",type=str,nargs='+', help="list of intermediate languages (for more variation choose inherently different languages).", default=["de","fr","es"])
 
+    parser.add_argument("-i","--interactive",action='store_true',help="",default=False)
+    parser.add_argument("-a","--all-in-one",action='store_true', help="",default=False)
+
     parser.add_argument("-c","--config", type=str,help="load config from a file",default=None)
     parser.add_argument("-v","--verbose", type=bool,help="print error messages instead of skipping them",default=False)
     parser.add_argument("-q","--quiet", type=bool,help="suppress error messages",default=False)
@@ -62,26 +61,40 @@ def __main__():
     else:
         conf = Config(flow={l:None for l in args.languages }, goal=goal,start= start,translator=args.translator)
         
-    if args.show_diagrams or args.show_diagram_init:
+    if args.interactive and (args.show_diagrams or args.show_diagram_init):
         print("Loaded translation diagram:")
         print(conf.str_diagram(nodes="language" ,arrows="translator_short"))
 
-    try:
-        while True:
-            print("Text:")
-            to_translate = input()
-            s = generate_alternatives(to_translate, conf)
-            for tmp_text in s:
-                if args.colour:
-                    print(get_edits_string(to_translate,tmp_text))
-                else:
-                    print(tmp_text)
-            print()
-            if args.show_diagrams or args.show_diagram_result:
-                print("Diagram:")
-                print(conf.str_diagram(nodes="result",arrows="language"))
-    except KeyboardInterrupt:
-        sys.exit(0)
+    if args.interactive:
+        try:
+            while True:
+                print("Text:")
+                to_translate = input()
+                s = generate_alternatives(to_translate, conf)
+                for tmp_text in s:
+                    if args.colour:
+                        print(get_edits_string(to_translate,tmp_text))
+                    else:
+                        print(tmp_text)
+                print()
+                if args.show_diagrams or args.show_diagram_result:
+                    print("Diagram:")
+                    print(conf.str_diagram(nodes="result",arrows="language"))
+        except KeyboardInterrupt:
+            sys.exit(0)
+    else:
+        lines = sys.stdin.readlines()
+        if args.all_in_one:
+            lines = ["".join(lines)]
+        results = None
+        for line in lines:
+            s = generate_alternatives(line, conf)
+            if results is None:
+                results = [""]*len(s)
+            for i,tmp_text in enumerate(s):
+                results[i] = results[i] + tmp_text + "\n"
+        for tmp_text in results:
+            print(tmp_text)
 
 
 if __name__ == "__main__":

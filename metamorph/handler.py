@@ -41,10 +41,12 @@ def recursive_translate(conf,sub,kk):
 	# Iterate elements of subnodes
         for _,k in enumerate(no_extra(sub[kk])):
             target = sub[kk][k]["extra"]["language"]
+        # get translator
+            translator = sub[kk][k]["extra"]["translator"]
 	    # infer deep_translator from string
-            t = getattr(sys.modules[__name__], sub[kk][k]["extra"]["translator"])
+            t = getattr(sys.modules[__name__], translator)
 	    # save the translated text in the extra field of the node
-            sub[kk][k]["extra"]["result"] = translate(t,source ,target,text)
+            sub[kk][k]["extra"]["result"] = translate(t,source ,target,text,api_key=conf.get_api_key(translator))
 	    # append result to the list of results from end nodes
             ret = ret + recursive_translate(conf,sub[kk],k)
         return ret
@@ -52,8 +54,7 @@ def recursive_translate(conf,sub,kk):
 	# Return the result of the end node.
         return [sub[kk]["extra"]["result"]]
 
-
-def translate(translator,source,target,text,quiet=False,verbose=True):
+def translate(translator,source,target,text,api_key=None,quiet=False,verbose=True):
     """
     Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
     :param translator: Translator to use (from :mod:`deep_translator`).
@@ -71,7 +72,7 @@ def translate(translator,source,target,text,quiet=False,verbose=True):
 	'Hallo Welt!'
     """
     try:
-        return translator(source=source,target=target).translate(text)
+        return translator(source=source,target=target,api_key=api_key).translate(text)
     except deep_translator.exceptions.LanguageNotSupportedException as e:
         if not quiet:
             print(e)
