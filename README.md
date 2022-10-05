@@ -73,7 +73,7 @@ This exemplary `configs/config.yaml` will produce following results (note `-sd` 
 A list of translators can be found here <https://github.com/nidhaloff/deep-translator>.
 
 ```sh
-metamorph -sd -gs en -c config.yaml
+metamorph -i -sd -gs en -c config.yaml
 ```
 
 ![DIAG](/img/diag.png)
