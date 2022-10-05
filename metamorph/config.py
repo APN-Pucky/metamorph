@@ -42,7 +42,7 @@ class Config:
     """
     Defines the language flow to generate alternative texts.
     """
-    def __init__(self,file:str = None, start = "en", goal = "en",translator = "GoogleTranslator", api_keys=None, flow = None,):
+    def __init__(self,file:str = None, start = "en", goal = "en",translator = "GoogleTranslator",proxies = None, api_keys=None, flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -55,6 +55,7 @@ class Config:
             self.api_keys = api_keys
         else:
             self.api_keys = {}
+        self.proxies = proxies
         if file is not None:
             self.load_file(file)
 
@@ -78,8 +79,9 @@ class Config:
             conf = yaml.safe_load(file)
             self.translator= conf['translator']
             if 'api_keys' in conf:
-                print("init")
                 self.api_keys = conf['api_keys']
+            if 'proxies' in conf:
+                self.proxies = conf['proxies']
             self.flow = conf['flow']
             if 'goal' in conf:
                 self.goal = conf['goal']

@@ -4,6 +4,9 @@ goal: "de"
 api_keys:
   GoogleTranslator: "XXX"
   DeeplTranslator: "XXX"
+proxies:
+  https: "your https proxy"
+  http: "your http proxy"
 
 flow:
   de:
