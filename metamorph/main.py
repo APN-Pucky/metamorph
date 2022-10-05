@@ -7,7 +7,6 @@ import argparse
 import sys
 # readline might not be available on all platforms
 try:
-    # noinspection PyUnresolvedReferences
     import readline
 except ImportError:
     pass
