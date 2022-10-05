@@ -1,0 +1,29 @@
+translator: "GoogleTranslator"
+start: "en"
+goal: "en"
+
+flow:
+  test1:
+    extra: 
+      translator: "MyMemoryTranslator"
+      language: "de"
+  test2:
+    extra: 
+      translator: "GoogleTranslator"
+      language: "de"
+  test3:
+    extra: 
+      translator: "MyMemoryTranslator"
+      language: "fr"
+  test4:
+    extra: 
+      translator: "GoogleTranslator"
+      language: "fr"
+  test5:
+    extra: 
+      translator: "MyMemoryTranslator"
+      language: "es"
+  test6:
+    extra: 
+      translator: "GoogleTranslator"
+      language: "es"

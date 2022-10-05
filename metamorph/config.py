@@ -1,3 +1,4 @@
+import json
 import yaml
 import re
 
@@ -61,6 +62,7 @@ class Config:
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
+        print(json.dumps(self.flow,indent=4))
 
     def get_api_key(self,translator):
         """
@@ -95,9 +97,10 @@ class Config:
         if "extra" not in direct[k]:
             direct[k]["extra"] = {}
         if "translator" not in direct[k]["extra"]:
+            print("overwritte",k,direct[k],direct[k]["extra"] )
             direct[k]["extra"]["translator"] = self.translator
         if "translator_short" not in direct[k]["extra"]:
-            direct[k]["extra"]["translator_short"] = remove_lower(self.translator)
+            direct[k]["extra"]["translator_short"] = remove_lower(direct[k]["extra"]["translator"])
         if "language" not in direct[k]["extra"]:
             direct[k]["extra"]["language"] =  k
         if "result" not in direct[k]["extra"]:
@@ -111,7 +114,9 @@ class Config:
         for k in no_extra(direct):
             if is_end(direct[k]):
                 if self.goal is not None:
-                    direct[k] = {self.goal:{}}
+                    if direct[k] is None:
+                        direct[k] = {}
+                    direct[k][self.goal] = {}
                     self.default_extra(direct,k)
                     self.default_extra(direct[k],self.goal)
                 else:

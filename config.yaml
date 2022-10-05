@@ -1,32 +1,9 @@
 translator: "GoogleTranslator"
-start: "de"
-goal: "de"
-api_keys:
-  GoogleTranslator: "XXX"
-  DeeplTranslator: "XXX"
-proxies:
-  https: "your https proxy"
-  http: "your http proxy"
+start: "en"
+goal: "en"
 
 flow:
   de:
-    fr:
-      es:
-        fr:
-    de:
-      es:
-      fr:
-        sv:
   fr:
-    en:
-  en:
-  fi:
-    de:
-      fr:
-        es:
-          fr:
-      de:
-        es:
-        fr:
-          sv:
-  sv:
+  es:
+
