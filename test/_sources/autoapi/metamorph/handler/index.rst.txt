@@ -42,7 +42,7 @@ Functions
    Recursively translate ``sub`` using Config ``conf``.
 
 
-.. py:function:: translate(translator, source, target, text, api_key=None, quiet=False, verbose=True)
+.. py:function:: translate(translator, source, target, text, api_key=None, proxies=None, quiet=False, verbose=True)
 
    Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
    :param translator: Translator to use (from :mod:`deep_translator`).

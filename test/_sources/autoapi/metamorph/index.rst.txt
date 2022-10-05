@@ -56,7 +56,7 @@ Functions
        True
 
 
-.. py:function:: translate(translator, source, target, text, api_key=None, quiet=False, verbose=True)
+.. py:function:: translate(translator, source, target, text, api_key=None, proxies=None, quiet=False, verbose=True)
 
    Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
    :param translator: Translator to use (from :mod:`deep_translator`).
@@ -74,7 +74,7 @@ Functions
        'Hallo Welt!'
 
 
-.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', api_keys=None, flow=None)
+.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', proxies=None, api_keys=None, flow=None)
 
    Defines the language flow to generate alternative texts.
 

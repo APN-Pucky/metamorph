@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-15-g290df7c
+                0.0.11-16-gea05650
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -122,7 +122,7 @@ import re
     &quot;&quot;&quot;
     Defines the language flow to generate alternative texts.
     &quot;&quot;&quot;
-    def __init__(self,file:str = None, start = &quot;en&quot;, goal = &quot;en&quot;,translator = &quot;GoogleTranslator&quot;, api_keys=None, flow = None,):
+    def __init__(self,file:str = None, start = &quot;en&quot;, goal = &quot;en&quot;,translator = &quot;GoogleTranslator&quot;,proxies = None, api_keys=None, flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -135,6 +135,7 @@ import re
             self.api_keys = api_keys
         else:
             self.api_keys = {}
+        self.proxies = proxies
         if file is not None:
             self.load_file(file)
 
@@ -158,8 +159,9 @@ import re
             conf = yaml.safe_load(file)
             self.translator= conf[&#39;translator&#39;]
             if &#39;api_keys&#39; in conf:
-                print(&quot;init&quot;)
                 self.api_keys = conf[&#39;api_keys&#39;]
+            if &#39;proxies&#39; in conf:
+                self.proxies = conf[&#39;proxies&#39;]
             self.flow = conf[&#39;flow&#39;]
             if &#39;goal&#39; in conf:
                 self.goal = conf[&#39;goal&#39;]
