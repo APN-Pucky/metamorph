@@ -69,7 +69,7 @@ flow:
   sv:
 ```
 
-This exemplary config.yaml will produce following results (note `-sd` for diagrams and `-c` for config, while most command line parameters take precedence over config (`-gs` here)).
+This exemplary `configs/config.yaml` will produce following results (note `-sd` for diagrams and `-c` for config, while most command line parameters take precedence over config (`-gs` here)).
 A list of translators can be found here <https://github.com/nidhaloff/deep-translator>.
 
 ```sh
