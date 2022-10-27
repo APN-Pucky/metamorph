@@ -38,7 +38,7 @@ setuptools.setup(
             "pandas",
             "ipython",
         ],
-        'docs': [
+        'doc': [
             "jupyter-sphinx",
             "sphinx_math_dollar",
             "pandoc",
