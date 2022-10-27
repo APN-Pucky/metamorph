@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-16-gea05650
+                0.0.11-24-gf41fc69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -78,7 +78,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for metamorph.config</h1><div class="highlight"><pre>
-<span></span>import yaml
+<span></span>import json
+import yaml
 import re
 
 <div class="viewcode-block" id="is_end"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.is_end">[docs]</a>def is_end(dic):
@@ -141,6 +142,7 @@ import re
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
+        #print(json.dumps(self.flow,indent=4))
 
 <div class="viewcode-block" id="Config.get_api_key"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.get_api_key">[docs]</a>    def get_api_key(self,translator):
         &quot;&quot;&quot;
@@ -175,9 +177,10 @@ import re
         if &quot;extra&quot; not in direct[k]:
             direct[k][&quot;extra&quot;] = {}
         if &quot;translator&quot; not in direct[k][&quot;extra&quot;]:
+            #print(&quot;overwritte&quot;,k,direct[k],direct[k][&quot;extra&quot;] )
             direct[k][&quot;extra&quot;][&quot;translator&quot;] = self.translator
         if &quot;translator_short&quot; not in direct[k][&quot;extra&quot;]:
-            direct[k][&quot;extra&quot;][&quot;translator_short&quot;] = remove_lower(self.translator)
+            direct[k][&quot;extra&quot;][&quot;translator_short&quot;] = remove_lower(direct[k][&quot;extra&quot;][&quot;translator&quot;])
         if &quot;language&quot; not in direct[k][&quot;extra&quot;]:
             direct[k][&quot;extra&quot;][&quot;language&quot;] =  k
         if &quot;result&quot; not in direct[k][&quot;extra&quot;]:
@@ -191,7 +194,9 @@ import re
         for k in no_extra(direct):
             if is_end(direct[k]):
                 if self.goal is not None:
-                    direct[k] = {self.goal:{}}
+                    if direct[k] is None:
+                        direct[k] = {}
+                    direct[k][self.goal] = {}
                     self.default_extra(direct,k)
                     self.default_extra(direct[k],self.goal)
                 else:

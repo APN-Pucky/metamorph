@@ -52,7 +52,7 @@ Functions
        True
        >>> "Hallo Welt!" in generate_alternatives("Hello world!",Config(start="de",goal="de",flow={"en":None,"fr":None,"es":None}))
        True
-       >>> "Hello World!" in generate_alternatives("Hallo world!",Config("default_config.yaml"))
+       >>> "Hello World!" in generate_alternatives("Hallo world!",Config("configs/default_config.yaml"))
        True
 
 
