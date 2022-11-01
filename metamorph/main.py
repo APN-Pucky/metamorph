@@ -31,8 +31,9 @@ def __main__():
     parser.add_argument("-t","--translator", type=str,help="default translator (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )",default="GoogleTranslator")
     parser.add_argument("-l","--languages",type=str,nargs='+', help="list of intermediate languages (for more variation choose inherently different languages).", default=["de","fr","es"])
 
-    parser.add_argument("-i","--interactive",action='store_true',help="",default=False)
-    parser.add_argument("-a","--all-in-one",action='store_true', help="",default=False)
+    parser.add_argument("-i","--interactive",action='store_true',help="Enable interactive mode. Will prompt for input.",default=True)
+    parser.add_argument("-ni","--non-interactive",action='store_false',help="Parse stdin, without input prompts.",dest="interactive")
+    parser.add_argument("-a","--all-in-one",action='store_true', help="Instead of parsing input line by line, parse all text at once",default=False)
 
     parser.add_argument("-c","--config", type=str,help="load config from a file",default=None)
     parser.add_argument("-v","--verbose", type=bool,help="print error messages instead of skipping them",default=False)
