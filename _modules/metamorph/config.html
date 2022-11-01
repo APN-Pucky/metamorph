@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-7-gbcede9c
+                0.0.12
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -78,7 +78,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for metamorph.config</h1><div class="highlight"><pre>
-<span></span>import yaml
+<span></span>import json
+import yaml
 import re
 
 <div class="viewcode-block" id="is_end"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.is_end">[docs]</a>def is_end(dic):
@@ -108,14 +109,21 @@ import re
     Example::
         &gt;&gt;&gt; remove_lower(&quot;GoogleTranslate&quot;)
         &#39;GT&#39;
+        &gt;&gt;&gt; remove_lower({&quot;GoogleTranslate&quot;:&quot;XXX&quot;})
+        {&#39;GT&#39;: &#39;XXX&#39;}
     &quot;&quot;&quot;
+    if type(text) is dict:
+        r = {}
+        for k,v in text.items():
+            r[remove_lower(k)] = v
+        return r
     return re.sub(&#39;[a-z]&#39;, &#39;&#39;, text)</div>
 
 <div class="viewcode-block" id="Config"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config">[docs]</a>class Config:
     &quot;&quot;&quot;
     Defines the language flow to generate alternative texts.
     &quot;&quot;&quot;
-    def __init__(self,file:str = None, start = &quot;en&quot;, goal = &quot;en&quot;,translator = &quot;GoogleTranslator&quot;, flow = None,):
+    def __init__(self,file:str = None, start = &quot;en&quot;, goal = &quot;en&quot;,translator = &quot;GoogleTranslator&quot;,proxies = None, api_keys=None, flow = None,):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -124,11 +132,26 @@ import re
             self.flow = flow
         if translator is not None:
             self.translator = translator
+        if api_keys is not None:
+            self.api_keys = api_keys
+        else:
+            self.api_keys = {}
+        self.proxies = proxies
         if file is not None:
             self.load_file(file)
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
+        #print(json.dumps(self.flow,indent=4))
+
+<div class="viewcode-block" id="Config.get_api_key"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.get_api_key">[docs]</a>    def get_api_key(self,translator):
+        &quot;&quot;&quot;
+        Returns the api key for ``translator``.
+        &quot;&quot;&quot;
+        if translator in self.api_keys:
+            return self.api_keys[translator]
+        #print(&quot;No api key for translator &quot; + translator + &quot; found.&quot;)
+        return None</div>
 
 <div class="viewcode-block" id="Config.load_file"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.load_file">[docs]</a>    def load_file(self,file:str):
         &quot;&quot;&quot;
@@ -137,6 +160,10 @@ import re
         with open(file, &#39;r&#39;) as file:
             conf = yaml.safe_load(file)
             self.translator= conf[&#39;translator&#39;]
+            if &#39;api_keys&#39; in conf:
+                self.api_keys = conf[&#39;api_keys&#39;]
+            if &#39;proxies&#39; in conf:
+                self.proxies = conf[&#39;proxies&#39;]
             self.flow = conf[&#39;flow&#39;]
             if &#39;goal&#39; in conf:
                 self.goal = conf[&#39;goal&#39;]
@@ -150,9 +177,10 @@ import re
         if &quot;extra&quot; not in direct[k]:
             direct[k][&quot;extra&quot;] = {}
         if &quot;translator&quot; not in direct[k][&quot;extra&quot;]:
+            #print(&quot;overwritte&quot;,k,direct[k],direct[k][&quot;extra&quot;] )
             direct[k][&quot;extra&quot;][&quot;translator&quot;] = self.translator
         if &quot;translator_short&quot; not in direct[k][&quot;extra&quot;]:
-            direct[k][&quot;extra&quot;][&quot;translator_short&quot;] = remove_lower(self.translator)
+            direct[k][&quot;extra&quot;][&quot;translator_short&quot;] = remove_lower(direct[k][&quot;extra&quot;][&quot;translator&quot;])
         if &quot;language&quot; not in direct[k][&quot;extra&quot;]:
             direct[k][&quot;extra&quot;][&quot;language&quot;] =  k
         if &quot;result&quot; not in direct[k][&quot;extra&quot;]:
@@ -166,7 +194,9 @@ import re
         for k in no_extra(direct):
             if is_end(direct[k]):
                 if self.goal is not None:
-                    direct[k] = {self.goal:{}}
+                    if direct[k] is None:
+                        direct[k] = {}
+                    direct[k][self.goal] = {}
                     self.default_extra(direct,k)
                     self.default_extra(direct[k],self.goal)
                 else:

@@ -52,11 +52,11 @@ Functions
        True
        >>> "Hallo Welt!" in generate_alternatives("Hello world!",Config(start="de",goal="de",flow={"en":None,"fr":None,"es":None}))
        True
-       >>> "Hello World!" in generate_alternatives("Hallo world!",Config("default_config.yaml"))
+       >>> "Hello World!" in generate_alternatives("Hallo world!",Config("configs/default_config.yaml"))
        True
 
 
-.. py:function:: translate(translator, source, target, text, quiet=False, verbose=True)
+.. py:function:: translate(translator, source, target, text, api_key=None, proxies=None, quiet=False, verbose=True)
 
    Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
    :param translator: Translator to use (from :mod:`deep_translator`).
@@ -74,9 +74,14 @@ Functions
        'Hallo Welt!'
 
 
-.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', flow=None)
+.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', proxies=None, api_keys=None, flow=None)
 
    Defines the language flow to generate alternative texts.
+
+   .. py:method:: get_api_key(translator)
+
+      Returns the api key for ``translator``.
+
 
    .. py:method:: load_file(file: str)
 

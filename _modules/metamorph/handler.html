@@ -29,7 +29,7 @@
             <a href="../../index.html" class="icon icon-home"> metamorph
           </a>
               <div class="version">
-                0.0.11-7-gbcede9c
+                0.0.12
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -98,7 +98,7 @@ import sys
 	True
         &gt;&gt;&gt; &quot;Hallo Welt!&quot; in generate_alternatives(&quot;Hello world!&quot;,Config(start=&quot;de&quot;,goal=&quot;de&quot;,flow={&quot;en&quot;:None,&quot;fr&quot;:None,&quot;es&quot;:None}))
 	True
-        &gt;&gt;&gt; &quot;Hello World!&quot; in generate_alternatives(&quot;Hallo world!&quot;,Config(&quot;default_config.yaml&quot;))
+        &gt;&gt;&gt; &quot;Hello World!&quot; in generate_alternatives(&quot;Hallo world!&quot;,Config(&quot;configs/default_config.yaml&quot;))
 	True
     &quot;&quot;&quot;
     s =[]
@@ -121,10 +121,16 @@ import sys
 	# Iterate elements of subnodes
         for _,k in enumerate(no_extra(sub[kk])):
             target = sub[kk][k][&quot;extra&quot;][&quot;language&quot;]
+        # get translator
+            translator = sub[kk][k][&quot;extra&quot;][&quot;translator&quot;]
 	    # infer deep_translator from string
-            t = getattr(sys.modules[__name__], sub[kk][k][&quot;extra&quot;][&quot;translator&quot;])
+            try:
+                t = getattr(sys.modules[__name__], translator)
+            except AttributeError:
+                print(&quot;Translator &quot; + translator + &quot; not found. Did you mean &quot; + translator + &quot;Translator?&quot;)
+                sys.exit(1)
 	    # save the translated text in the extra field of the node
-            sub[kk][k][&quot;extra&quot;][&quot;result&quot;] = translate(t,source ,target,text)
+            sub[kk][k][&quot;extra&quot;][&quot;result&quot;] = translate(t,source ,target,text,api_key=conf.get_api_key(translator),proxies = conf.proxies)
 	    # append result to the list of results from end nodes
             ret = ret + recursive_translate(conf,sub[kk],k)
         return ret
@@ -132,8 +138,7 @@ import sys
 	# Return the result of the end node.
         return [sub[kk][&quot;extra&quot;][&quot;result&quot;]]</div>
 
-
-<div class="viewcode-block" id="translate"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.handler.translate">[docs]</a>def translate(translator,source,target,text,quiet=False,verbose=True):
+<div class="viewcode-block" id="translate"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.handler.translate">[docs]</a>def translate(translator,source,target,text,api_key=None,proxies=None,quiet=False,verbose=True):
     &quot;&quot;&quot;
     Translate ``text`` from ``source`` language to ``target`` language using translator ``translator``.
     :param translator: Translator to use (from :mod:`deep_translator`).
@@ -151,7 +156,7 @@ import sys
 	&#39;Hallo Welt!&#39;
     &quot;&quot;&quot;
     try:
-        return translator(source=source,target=target).translate(text)
+        return translator(source=source,target=target,api_key=api_key,proxies=proxies).translate(text)
     except deep_translator.exceptions.LanguageNotSupportedException as e:
         if not quiet:
             print(e)
