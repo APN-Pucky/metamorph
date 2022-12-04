@@ -1,4 +1,3 @@
-import json
 import yaml
 import re
 
@@ -32,7 +31,7 @@ def remove_lower(text:str):
         >>> remove_lower({"GoogleTranslate":"XXX"})
         {'GT': 'XXX'}
     """
-    if type(text) is dict:
+    if isinstance(text,dict):
         r = {}
         for k,v in text.items():
             r[remove_lower(k)] = v
@@ -62,7 +61,6 @@ class Config:
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
-        #print(json.dumps(self.flow,indent=4))
 
     def get_api_key(self,translator):
         """
