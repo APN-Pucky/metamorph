@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.0.12-14-g40fca6f
+                0.0.12-15-g24b3e06
               </div>
             
           
@@ -170,8 +170,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for metamorph.config</h1><div class="highlight"><pre>
-<span></span>import json
-import yaml
+<span></span>import yaml
 import re
 
 <div class="viewcode-block" id="is_end"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.is_end">[docs]</a>def is_end(dic):
@@ -204,7 +203,7 @@ import re
         &gt;&gt;&gt; remove_lower({&quot;GoogleTranslate&quot;:&quot;XXX&quot;})
         {&#39;GT&#39;: &#39;XXX&#39;}
     &quot;&quot;&quot;
-    if type(text) is dict:
+    if isinstance(text,dict):
         r = {}
         for k,v in text.items():
             r[remove_lower(k)] = v
@@ -234,7 +233,6 @@ import re
 
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
-        #print(json.dumps(self.flow,indent=4))
 
 <div class="viewcode-block" id="Config.get_api_key"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.get_api_key">[docs]</a>    def get_api_key(self,translator):
         &quot;&quot;&quot;
