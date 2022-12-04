@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "metamorph"
 version = "0.0.0"
-description = "Metamorph is a tool for transforming Text into other Text."
+description = "Metamorph text into other reworded text."
 authors = ["Alexander Puck Neuwirth <alexander@neuwirth-informatik.de>"]
 readme = "README.md"
 
