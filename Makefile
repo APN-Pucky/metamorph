@@ -15,7 +15,7 @@ build:
 
 test:
 	rm -f .coverage coverage.xml
-	poetry run pytest metamorph
+	poetry run pytest
 
 commit: 
 	-git add .
@@ -27,8 +27,9 @@ push: commit
 pull: commit
 	git pull
 
-clean-all: clean
-	find source/example/ -type f -name '*.ipynb' | xargs jupyter nbconvert --clear-output --inplace
+clean:
+	rm -r .eggs .pytest_cache *.egg-info
+	find doc/source/example/ -type f -name '*.ipynb' | xargs jupyter nbconvert --clear-output --inplace
 
 
 release: push html
