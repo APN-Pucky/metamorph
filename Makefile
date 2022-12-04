@@ -1,8 +1,8 @@
 livehtml:
-	poetry shell && $(MAKE) -C docs livehtml
+	poetry run $(MAKE) -C docs livehtml
 
 html:
-	poetry shell && $(MAKE) -C docs html
+	poetry run $(MAKE) -C docs html
 
 doc: html
 
@@ -15,7 +15,7 @@ build:
 
 test:
 	rm -f .coverage coverage.xml
-	poetry shell && pytest metamorph
+	poetry run pytest
 
 commit: 
 	-git add .
