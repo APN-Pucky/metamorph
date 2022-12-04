@@ -16,7 +16,7 @@ pyyaml = "*"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-Sphinx = "*"
+sphinx = "*"
 sphinx-rtd-theme = "*"
 sphinxcontrib-napoleon = "*"
 nbsphinx = "*"
@@ -24,9 +24,9 @@ jupyter-sphinx = "*"
 sphinx-autoapi = "*"
 sphinx_autobuild = "*"
 sphinx_math_dollar = "*"
-#myst-parser  = "*"
+pandoc = "*"
 numpydoc = "*"
-smpl = {path = "/home/apn/git/smpl", develop = true}
+#myst-parser  = "*"
 #smpl = {git = "https://github.com/APN-Pucky/smpl.git", branch = "master"}
 
 [tool.poetry.group.dev]
