@@ -10,7 +10,7 @@ install:
 	python3 -m pip install --user .[docs,dev]
 
 build:
-	python3 -m build
+	poetry build
 
 test:
 	rm -f .coverage coverage.xml
