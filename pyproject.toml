@@ -27,7 +27,7 @@ sphinx_math_dollar = "*"
 pandoc = "*"
 numpydoc = "*"
 myst-parser  = "*"
-#smpl = {git = "https://github.com/APN-Pucky/smpl.git", branch = "master"}
+toml = "*"
 
 [tool.poetry.group.dev]
 optional = true
