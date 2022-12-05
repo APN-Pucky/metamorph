@@ -3,21 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to metamorph's documentation!
-=====================================
+=================================
+|name| |version| documentation
+=================================
 
-
-Install
-=======
-
-Stable version::
-
-   $ pip install metamorph
-
-Dev version::
-
-   $ pip install --index-url https://test.pypi.org/simple/ metamorph
-
+.. include:: ../../README.md
+   :parser: myst_parser.sphinx_
 
 .. toctree::
    :maxdepth: 2

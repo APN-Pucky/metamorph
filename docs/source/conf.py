@@ -12,19 +12,21 @@
 #
 import datetime
 import os
-import sys
 import re
+import sys
 
-sys.path.insert(0, os.path.abspath('../..'))
+import toml
+
+sys.path.insert(0, os.path.abspath("../.."))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'metamorph'
-copyright = str(datetime.datetime.now().year) + ', APN-Pucky'
-author = 'APN-Pucky'
-version = re.sub('^', '', os.popen('git describe --tags').read().strip())
-
+info = toml.load("../../pyproject.toml")
+project = info["tool"]["poetry"]["name"]
+copyright = str(datetime.datetime.now().year) + ", Alexander Puck Neuwirth"
+author = ", ".join(info["tool"]["poetry"]["authors"])
+version = re.sub("^", "", os.popen("git describe --tags").read().strip())
 
 
 # -- General configuration ---------------------------------------------------
@@ -33,21 +35,21 @@ version = re.sub('^', '', os.popen('git describe --tags').read().strip())
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-	'sphinx.ext.autodoc',
-	'sphinx.ext.githubpages',
-    	'sphinx.ext.viewcode',
-    	'sphinx.ext.doctest',
-    	'sphinx.ext.autosummary',
-    	'sphinx.ext.coverage',
-    	'autoapi.extension',
-	'sphinx.ext.napoleon',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.doctest",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
+    "autoapi.extension",
+    "sphinx.ext.napoleon",
 ]
 napoleon_use_ivar = True
-autoapi_type = 'python'
-autoapi_dirs = ['../../metamorph']
-autoapi_python_class_content = 'both'
+autoapi_type = "python"
+autoapi_dirs = ["../../metamorph"]
+autoapi_python_class_content = "both"
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -56,15 +58,15 @@ exclude_patterns = []
 
 
 # -- Options for HTML output -------------------------------------------------
-highlight_language = 'none'
+highlight_language = "none"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
