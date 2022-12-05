@@ -30,7 +30,7 @@ project = info["tool"]["poetry"]["name"]
 copyright = str(datetime.datetime.now().year) + ", Alexander Puck Neuwirth"
 author = ", ".join(info["tool"]["poetry"]["authors"])
 version = re.sub("^", "", os.popen("git describe --tags").read().strip())
-rst_prolog = f""".. |project| replace:: {project}"""
+rst_epilog = f""".. |project| replace:: {project}\n\n"""
 
 
 # -- General configuration ---------------------------------------------------
@@ -51,7 +51,7 @@ extensions = [
 ]
 napoleon_use_ivar = True
 autoapi_type = "python"
-autoapi_dirs = ["../../metamorph"]
+autoapi_dirs = ["../../" + project]
 autoapi_python_class_content = "both"
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
