@@ -12,6 +12,9 @@ deep_translator = "*"
 colorama ="*"
 pyyaml = "*"
 
+[tool.poetry.scripts]
+metamorph = "metamorph.main:__main__"
+
 [tool.poetry.group.docs]
 optional = true
 
