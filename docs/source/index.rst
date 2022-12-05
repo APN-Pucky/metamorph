@@ -36,7 +36,8 @@
    :titlesonly:
    :caption: Module:
 
-   autoapi/index.rst
+   /autoapi/metamorph/index
+
 
 
 
