@@ -16,11 +16,19 @@
 
 
 .. toctree::
+   :titlesonly:
+   :caption: Module:
+
+   autoapi/index
+
+
+.. toctree::
    :glob:
    :hidden:
    :caption: Versions:
    :maxdepth: 3
 
+   RTD <https://metamorph-apn.readthedocs.io/en/stable/>
    Stable <https://apn-pucky.github.io/metamorph/>
    Dev <https://apn-pucky.github.io/metamorph/test/>
 
@@ -31,13 +39,6 @@
    :maxdepth: 3
 
    GitHub <https://github.com/APN-Pucky/metamorph>
-
-.. toctree::
-   :titlesonly:
-   :caption: Module:
-
-   autoapi/index
-
 
 
 
