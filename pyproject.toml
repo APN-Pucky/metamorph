@@ -7,7 +7,7 @@ readme = "README.md"
 repository = "https://github.com/APN-Pucky/metamorph"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 termcolor = "*"
 deep_translator = "*"
 colorama ="*"
@@ -31,7 +31,7 @@ pandas = "*"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "*"
+sphinx = "<7.0.0"
 sphinx-rtd-theme = "*"
 sphinxcontrib-napoleon = "*"
 nbsphinx = "*"
