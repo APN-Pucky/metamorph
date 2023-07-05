@@ -1,15 +1,10 @@
-from .handler import generate_alternatives, translate
 from .config import Config
+from .handler import generate_alternatives, translate
 
 __all__ = ["generate_alternatives", "translate", "Config"]
 
-import pkg_resources as pkg  # part of setuptools
+from importlib.metadata import version
 
 package = "metamorph"
 
-try:
-    version = pkg.require(package)[0].version
-except pkg.DistributionNotFound:
-    version = "dirty"
-
-__version__ = version
+__version__ = version(package)
