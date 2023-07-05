@@ -33,9 +33,6 @@
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     
@@ -67,7 +64,7 @@
             
             
               <div class="version">
-                0.0.13-24-gc0f0a58
+                0.0.13-54-gf0e725f
               </div>
             
           
@@ -235,7 +232,7 @@ import re
         self.flow = {self.start : self.flow}
         self.fill_missing(self.flow)
 
-<div class="viewcode-block" id="Config.get_api_key"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.get_api_key">[docs]</a>    def get_api_key(self,translator):
+<div class="viewcode-block" id="Config.get_api_key"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config.get_api_key">[docs]</a>    def get_api_key(self,translator):
         &quot;&quot;&quot;
         Returns the api key for ``translator``.
         &quot;&quot;&quot;
@@ -244,7 +241,7 @@ import re
         #print(&quot;No api key for translator &quot; + translator + &quot; found.&quot;)
         return None</div>
 
-<div class="viewcode-block" id="Config.load_file"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.load_file">[docs]</a>    def load_file(self,file:str):
+<div class="viewcode-block" id="Config.load_file"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config.load_file">[docs]</a>    def load_file(self,file:str):
         &quot;&quot;&quot;
         Loads a configuration file.
         &quot;&quot;&quot;
@@ -261,7 +258,7 @@ import re
             if &#39;start&#39; in conf:
                 self.start = conf[&#39;start&#39;]</div>
 
-<div class="viewcode-block" id="Config.default_extra"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.default_extra">[docs]</a>    def default_extra(self,direct,k):
+<div class="viewcode-block" id="Config.default_extra"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config.default_extra">[docs]</a>    def default_extra(self,direct,k):
         &quot;&quot;&quot;
         Adds default keys to dictionary at ``direct[k]``.
         &quot;&quot;&quot;
@@ -278,7 +275,7 @@ import re
             direct[k][&quot;extra&quot;][&quot;result&quot;] =  &quot;&quot;</div>
  
 
-<div class="viewcode-block" id="Config.fill_missing"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.fill_missing">[docs]</a>    def fill_missing(self,direct):
+<div class="viewcode-block" id="Config.fill_missing"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config.fill_missing">[docs]</a>    def fill_missing(self,direct):
         &quot;&quot;&quot;
         Sets default extras for missing elements in dictionary.
         &quot;&quot;&quot;
@@ -299,7 +296,7 @@ import re
             self.fill_missing(direct[k])</div>
 
 
-<div class="viewcode-block" id="Config.str_diagram"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config.str_diagram">[docs]</a>    def str_diagram(self,nodes=&quot;language&quot;,arrows=None):
+<div class="viewcode-block" id="Config.str_diagram"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config.str_diagram">[docs]</a>    def str_diagram(self,nodes=&quot;language&quot;,arrows=None):
         &quot;&quot;&quot;
         Prints a diagram of the language flow.
         &quot;&quot;&quot;
@@ -308,7 +305,7 @@ import re
             s = s + self._recursive_str_diagram(self.flow,k,nodes=nodes,arrows=arrows) + &quot;\n\n&quot;
         return s</div>
 
-<div class="viewcode-block" id="Config._recursive_get_str_max_length"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config._recursive_get_str_max_length">[docs]</a>    def _recursive_get_str_max_length(self,sub,key):
+<div class="viewcode-block" id="Config._recursive_get_str_max_length"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config._recursive_get_str_max_length">[docs]</a>    def _recursive_get_str_max_length(self,sub,key):
         ret = len(sub[&quot;extra&quot;][key])
         for k in no_extra(sub):
             m = self._recursive_get_str_max_length(sub[k],key)
@@ -317,7 +314,7 @@ import re
         return ret</div>
 
 
-<div class="viewcode-block" id="Config._recursive_str_diagram"><a class="viewcode-back" href="../../autoapi/metamorph/config/index.html#metamorph.config.Config._recursive_str_diagram">[docs]</a>    def _recursive_str_diagram(self,sub,kk,depth=1,lines=None,nodes=&quot;language&quot;,arrows=None,len_nodes=None,len_arrows=None):
+<div class="viewcode-block" id="Config._recursive_str_diagram"><a class="viewcode-back" href="../../autoapi/metamorph/index.html#metamorph.config.Config._recursive_str_diagram">[docs]</a>    def _recursive_str_diagram(self,sub,kk,depth=1,lines=None,nodes=&quot;language&quot;,arrows=None,len_nodes=None,len_arrows=None):
         if lines is None:
             lines = []
         if len_arrows is None:

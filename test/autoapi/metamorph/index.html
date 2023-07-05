@@ -34,9 +34,6 @@
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     
@@ -70,7 +67,7 @@
             
             
               <div class="version">
-                0.0.13-24-gc0f0a58
+                0.0.13-54-gf0e725f
               </div>
             
           
@@ -223,6 +220,52 @@
 </tr>
 </tbody>
 </table>
+<dl class="py class">
+<dt class="sig sig-object py" id="metamorph.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metamorph.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GoogleTranslator'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the language flow to generate alternative texts.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="metamorph.Config.get_api_key">
+<span class="sig-name descname"><span class="pre">get_api_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config.get_api_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config.get_api_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the api key for <code class="docutils literal notranslate"><span class="pre">translator</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metamorph.Config.load_file">
+<span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config.load_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config.load_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a configuration file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metamorph.Config.default_extra">
+<span class="sig-name descname"><span class="pre">default_extra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config.default_extra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config.default_extra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds default keys to dictionary at <code class="docutils literal notranslate"><span class="pre">direct[k]</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metamorph.Config.fill_missing">
+<span class="sig-name descname"><span class="pre">fill_missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direct</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config.fill_missing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config.fill_missing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets default extras for missing elements in dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metamorph.Config.str_diagram">
+<span class="sig-name descname"><span class="pre">str_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'language'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config.str_diagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config.str_diagram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a diagram of the language flow.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metamorph.Config._recursive_get_str_max_length">
+<span class="sig-name descname"><span class="pre">_recursive_get_str_max_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config._recursive_get_str_max_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config._recursive_get_str_max_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metamorph.Config._recursive_str_diagram">
+<span class="sig-name descname"><span class="pre">_recursive_str_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'language'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">len_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">len_arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config._recursive_str_diagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config._recursive_str_diagram" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="metamorph.generate_alternatives">
 <span class="sig-prename descclassname"><span class="pre">metamorph.</span></span><span class="sig-name descname"><span class="pre">generate_alternatives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/handler.html#generate_alternatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.generate_alternatives" title="Permalink to this definition">¶</a></dt>
@@ -278,52 +321,6 @@
 </div>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="metamorph.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metamorph.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GoogleTranslator'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metamorph/config.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metamorph.Config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the language flow to generate alternative texts.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="metamorph.Config.get_api_key">
-<span class="sig-name descname"><span class="pre">get_api_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metamorph.Config.get_api_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the api key for <code class="docutils literal notranslate"><span class="pre">translator</span></code>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="metamorph.Config.load_file">
-<span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metamorph.Config.load_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a configuration file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="metamorph.Config.default_extra">
-<span class="sig-name descname"><span class="pre">default_extra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metamorph.Config.default_extra" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds default keys to dictionary at <code class="docutils literal notranslate"><span class="pre">direct[k]</span></code>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="metamorph.Config.fill_missing">
-<span class="sig-name descname"><span class="pre">fill_missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direct</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metamorph.Config.fill_missing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets default extras for missing elements in dictionary.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="metamorph.Config.str_diagram">
-<span class="sig-name descname"><span class="pre">str_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'language'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metamorph.Config.str_diagram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints a diagram of the language flow.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="metamorph.Config._recursive_get_str_max_length">
-<span class="sig-name descname"><span class="pre">_recursive_get_str_max_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metamorph.Config._recursive_get_str_max_length" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="metamorph.Config._recursive_str_diagram">
-<span class="sig-name descname"><span class="pre">_recursive_str_diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'language'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">len_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">len_arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metamorph.Config._recursive_str_diagram" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 </section>

@@ -53,6 +53,7 @@ Functions
 
 .. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', proxies=None, api_keys=None, flow=None)
 
+
    Defines the language flow to generate alternative texts.
 
    .. py:method:: get_api_key(translator)
