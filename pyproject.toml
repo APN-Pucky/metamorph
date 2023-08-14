@@ -70,7 +70,6 @@ format-jinja = "{% if distance == 0 %}{{ base }}{% else %}{{ base }}.{{ distance
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-testpaths = ["tests"]
 addopts = [ "-Werror", "-v", "--cov=metamorph", "--cov-config=.coveragerc", "--cov-append", "--cov-report=term", "--cov-report=xml", "--doctest-modules","--ignore=docs/source/conf.py"]
 filterwarnings = [
     'ignore: pkg_resources is deprecated as an API:DeprecationWarning'
