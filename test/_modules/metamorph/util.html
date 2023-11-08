@@ -33,7 +33,7 @@
             metamorph
           </a>
               <div class="version">
-                0.0.13-70-gd13b590
+                0.0.13-119-gc47d2fa
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -86,19 +86,41 @@
 <span></span>import difflib
 from termcolor import colored
 
-<div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/util/index.html#metamorph.util.get_edits_string">[docs]</a>def get_edits_string(old, new):
+<div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/util/index.html#metamorph.util.get_edits_string">[docs]</a>def get_edits_string(old:str, new:str, on_color :bool= True):
     &quot;&quot;&quot;
     Colorize the differences between two strings.
     &quot;&quot;&quot;
     result = &quot;&quot;
     codes = difflib.SequenceMatcher(a=old, b=new).get_opcodes()
+    reds = []
+    if on_color:
+        for code in codes:
+            if code[0] == &quot;replace&quot;:
+                reds += list(range(code[1],code[2]))
+            elif code[0] == &quot;delete&quot;:
+                reds += list(range(code[1],code[2]))
+    
+    li = 0
+
     for code in codes:
         if code[0] == &quot;equal&quot;:
-            result += old[code[1]:code[2]]
+            for i in range(code[3],code[4]):
+                result += colored(new[i],color=None,on_color=&#39;on_red&#39; if i in reds else None)
+            li=code[4]
         elif code[0] == &quot;insert&quot;:
-            result += colored(new[code[3]:code[4]],&#39;green&#39;)
+            for i in range(code[3],code[4]):
+                result += colored(new[i],color=&#39;green&#39;,on_color=&#39;on_red&#39; if i in reds else None)
+            li=code[4]
         elif code[0] == &quot;replace&quot;:
-            result += colored(new[code[3]:code[4]],&#39;green&#39;)
+            for i in range(code[3],code[4]):
+                result += colored(new[i],color=&#39;green&#39;,on_color=&#39;on_red&#39; if i in reds else None)
+            li=code[4]
+    
+    mr = max(reds) if len(reds) &gt; 0 else 0
+    #print(mr, li, reds)
+    if li &lt; mr:
+        result += colored(&quot; &quot;*(mr-li),color=None,on_color=&#39;on_red&#39;)
+
     return result</div>
 </pre></div>
 

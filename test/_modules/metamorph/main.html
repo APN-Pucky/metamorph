@@ -33,7 +33,7 @@
             metamorph
           </a>
               <div class="version">
-                0.0.13-70-gd13b590
+                0.0.13-119-gc47d2fa
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -126,6 +126,11 @@ from metamorph.handler import generate_alternatives
 
     parser.add_argument(&quot;--colour&quot;,action=&#39;store_true&#39; ,help=&quot;show coloured differences&quot;,default=True)
     parser.add_argument(&quot;-nc&quot;,&quot;--no-colour&quot;,dest=&#39;colour&#39;,action=&#39;store_false&#39; ,help=&quot;don&#39;t show coloured differences&quot;)
+
+    parser.add_argument(&quot;--background-colour&quot;,action=&#39;store_true&#39; ,help=&quot;show coloured deletions&quot;,default=True)
+    parser.add_argument(&quot;-nbc&quot;,&quot;--no-background-colour&quot;,dest=&#39;background_colour&#39;,action=&#39;store_false&#39; ,help=&quot;don&#39;t show coloured deletions&quot;)
+
+
     parser.add_argument(&quot;-sd&quot;, &quot;--show-diagrams&quot;, action=&#39;store_true&#39;, help=&quot;print all diagrams&quot;,default=False )
     parser.add_argument(&quot;-sdi&quot;, &quot;--show-diagram-init&quot;, action=&#39;store_false&#39;, help=&quot;print the diagram translation flow&quot;,default=True)
     parser.add_argument(&quot;-hdi&quot;, &quot;--hide-diagram-init&quot;, dest=&#39;show_diagram_init&#39;,action=&#39;store_false&#39;, help=&quot;don&#39;t print the diagram translation flow&quot;)
@@ -159,7 +164,7 @@ from metamorph.handler import generate_alternatives
                 s = generate_alternatives(to_translate, conf)
                 for tmp_text in s:
                     if args.colour:
-                        print(get_edits_string(to_translate,tmp_text))
+                        print(get_edits_string(to_translate,tmp_text,args.background_colour))
                     else:
                         print(tmp_text)
                 print()
