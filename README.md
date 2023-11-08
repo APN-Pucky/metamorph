@@ -4,6 +4,8 @@
 
 First line is the input followed by colorized suggestions.
 
+Metamorph easily fixes typos and suggests alternative wordings by repeatedly translating the text into different languages and in the end to the desired language. 
+
 Doc: `metamorph --help`
 
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/metamorph.svg) 
