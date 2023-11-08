@@ -1,0 +1,10 @@
+translator: "GoogleTranslator"
+start: "en"
+goal: "en"
+color: "red"
+on_color: "on_blue"
+
+flow:
+  de:
+  fr:
+  es:
