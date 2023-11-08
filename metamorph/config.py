@@ -42,7 +42,7 @@ class Config:
     """
     Defines the language flow to generate alternative texts.
     """
-    def __init__(self,file:str = None, start = "en", goal = "en",translator = "GoogleTranslator",proxies = None, api_keys=None, flow = None,):
+    def __init__(self,file:str = None, start = "en", goal = "en",translator = "GoogleTranslator",proxies = None, api_keys=None, flow = None,color='green', on_color='on_red'):
         if goal is not None:
             self.goal = goal
         if start is not None:
@@ -51,6 +51,10 @@ class Config:
             self.flow = flow
         if translator is not None:
             self.translator = translator
+        if color is not None:
+            self.color = color
+        if on_color is not None:
+            self.on_color = on_color
         if api_keys is not None:
             self.api_keys = api_keys
         else:
@@ -80,6 +84,10 @@ class Config:
             self.translator= conf['translator']
             if 'api_keys' in conf:
                 self.api_keys = conf['api_keys']
+            if 'color' in conf:
+                self.color = conf['color']
+            if 'on_color' in conf:
+                self.on_color = conf['on_color']
             if 'proxies' in conf:
                 self.proxies = conf['proxies']
             self.flow = conf['flow']

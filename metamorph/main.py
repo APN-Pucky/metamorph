@@ -79,7 +79,7 @@ def __main__():
                 s = generate_alternatives(to_translate, conf)
                 for tmp_text in s:
                     if args.colour:
-                        print(get_edits_string(to_translate,tmp_text,args.background_colour))
+                        print(get_edits_string(to_translate,tmp_text,conf.color,conf.on_color if args.background_colour else None))
                     else:
                         print(tmp_text)
                 print()
