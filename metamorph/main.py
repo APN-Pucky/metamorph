@@ -41,6 +41,11 @@ def __main__():
 
     parser.add_argument("--colour",action='store_true' ,help="show coloured differences",default=True)
     parser.add_argument("-nc","--no-colour",dest='colour',action='store_false' ,help="don't show coloured differences")
+
+    parser.add_argument("--background-colour",action='store_true' ,help="show coloured deletions",default=True)
+    parser.add_argument("-nbc","--no-background-colour",dest='background_colour',action='store_false' ,help="don't show coloured deletions")
+
+
     parser.add_argument("-sd", "--show-diagrams", action='store_true', help="print all diagrams",default=False )
     parser.add_argument("-sdi", "--show-diagram-init", action='store_false', help="print the diagram translation flow",default=True)
     parser.add_argument("-hdi", "--hide-diagram-init", dest='show_diagram_init',action='store_false', help="don't print the diagram translation flow")
@@ -74,7 +79,7 @@ def __main__():
                 s = generate_alternatives(to_translate, conf)
                 for tmp_text in s:
                     if args.colour:
-                        print(get_edits_string(to_translate,tmp_text))
+                        print(get_edits_string(to_translate,tmp_text,args.background_colour))
                     else:
                         print(tmp_text)
                 print()
