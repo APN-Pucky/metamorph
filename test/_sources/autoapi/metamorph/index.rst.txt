@@ -38,7 +38,7 @@ Functions
 
 
 
-.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', proxies=None, api_keys=None, flow=None)
+.. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', proxies=None, api_keys=None, flow=None, color='green', on_color='on_red')
 
 
    Defines the language flow to generate alternative texts.

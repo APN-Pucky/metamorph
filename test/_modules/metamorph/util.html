@@ -33,7 +33,7 @@
             metamorph
           </a>
               <div class="version">
-                0.0.13-119-gc47d2fa
+                0.0.13-121-g0b509c2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -86,7 +86,7 @@
 <span></span>import difflib
 from termcolor import colored
 
-<div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/util/index.html#metamorph.util.get_edits_string">[docs]</a>def get_edits_string(old:str, new:str, on_color :bool= True):
+<div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/util/index.html#metamorph.util.get_edits_string">[docs]</a>def get_edits_string(old:str, new:str, color:str=&#39;green&#39;, on_color :str= &#39;on_red&#39;):
     &quot;&quot;&quot;
     Colorize the differences between two strings.
     &quot;&quot;&quot;
@@ -101,25 +101,24 @@ from termcolor import colored
                 reds += list(range(code[1],code[2]))
     
     li = 0
-
     for code in codes:
         if code[0] == &quot;equal&quot;:
             for i in range(code[3],code[4]):
-                result += colored(new[i],color=None,on_color=&#39;on_red&#39; if i in reds else None)
+                result += colored(new[i],color=None,on_color=on_color if i in reds else None)
             li=code[4]
         elif code[0] == &quot;insert&quot;:
             for i in range(code[3],code[4]):
-                result += colored(new[i],color=&#39;green&#39;,on_color=&#39;on_red&#39; if i in reds else None)
+                result += colored(new[i],color=color,on_color=on_color if i in reds else None)
             li=code[4]
         elif code[0] == &quot;replace&quot;:
             for i in range(code[3],code[4]):
-                result += colored(new[i],color=&#39;green&#39;,on_color=&#39;on_red&#39; if i in reds else None)
+                result += colored(new[i],color=color,on_color=on_color if i in reds else None)
             li=code[4]
     
-    mr = max(reds) if len(reds) &gt; 0 else 0
-    #print(mr, li, reds)
-    if li &lt; mr:
-        result += colored(&quot; &quot;*(mr-li),color=None,on_color=&#39;on_red&#39;)
+    #mr = max(reds) if len(reds) &gt; 0 else 0
+    ##print(mr, li, reds)
+    #if li &lt; mr:
+    #    result += colored(&quot; &quot;*(mr-li),color=None,on_color=on_color)
 
     return result</div>
 </pre></div>
