@@ -17,7 +17,7 @@ Functions
 
 
 
-.. py:function:: get_edits_string(old, new)
+.. py:function:: get_edits_string(old: str, new: str, color: str = 'green', on_color: str = 'on_red')
 
    Colorize the differences between two strings.
 
