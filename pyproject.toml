@@ -10,7 +10,7 @@ repository = "https://github.com/APN-Pucky/metamorph"
 python = "^3.8"
 termcolor = "*"
 deep_translator = "*"
-colorama ="*"
+colorama = "*"
 pyyaml = "*"
 
 [tool.poetry.scripts]
