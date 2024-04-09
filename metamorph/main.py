@@ -2,6 +2,8 @@
 import argparse
 import sys
 
+from metamorph.interactive import input_loop, merge
+
 # readline might not be available on all platforms
 try:
     import readline
@@ -14,6 +16,8 @@ try:
     from metamorph.util import get_edits_string
 except ImportError:
     get_edits_string = lambda old, new: new
+
+from smpl_io import io as sio
 
 import metamorph
 from metamorph.config import Config
@@ -53,14 +57,12 @@ def __main__():
     )
 
     parser.add_argument(
-        "-i",
         "--interactive",
         action="store_true",
         help="Enable interactive mode. Will prompt for input.",
         default=True,
     )
     parser.add_argument(
-        "-ni",
         "--no-interactive",
         "--non-interactive",
         action="store_false",
@@ -81,6 +83,22 @@ def __main__():
         action="store_true",
         help="merge all translations into one",
         default=False,
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        help="output",
+        default="-",
+    )
+
+    parser.add_argument(
+        "-i",
+        "--input",
+        type=str,
+        help="input",
+        default="-",
     )
 
     parser.add_argument(
@@ -182,31 +200,12 @@ def __main__():
         print(conf.str_diagram(nodes="language", arrows="translator_short"))
 
     if args.interactive:
-        try:
-            while True:
-                print("Text:")
-                to_translate = input()
-                s = generate_alternatives(to_translate, conf)
-                for tmp_text in s:
-                    if args.colour:
-                        print(
-                            get_edits_string(
-                                to_translate,
-                                tmp_text,
-                                conf.color,
-                                conf.on_color if args.background_colour else None,
-                            )
-                        )
-                    else:
-                        print(tmp_text)
-                print()
-                if args.show_diagrams or args.show_diagram_result:
-                    print("Diagram:")
-                    print(conf.str_diagram(nodes="result", arrows="language"))
-        except KeyboardInterrupt:
-            sys.exit(0)
+        if args.merge:
+            merge(args, conf)
+        else:
+            input_loop(args, conf)
     else:
-        lines = sys.stdin.readlines()
+        lines = sio.read(args.input).split("\n")  # sys.stdin.readlines()
         if args.all_in_one:
             lines = ["".join(lines)]
         results = None
@@ -216,8 +215,7 @@ def __main__():
                 results = [""] * len(s)
             for i, tmp_text in enumerate(s):
                 results[i] = results[i] + tmp_text + "\n"
-        for tmp_text in results:
-            print(tmp_text)
+        sio.write(args.output, "\n".join(results))
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ termcolor = "*"
 deep_translator = "*"
 colorama = "*"
 pyyaml = "*"
+smpl_io = "*"
 
 [tool.poetry.scripts]
 metamorph = "metamorph.main:__main__"
