@@ -20,7 +20,6 @@ try:
     __readline = True
 except ImportError:
     __readline = False
-    pass
 
 
 def rlinput(prompt, prefill=""):

@@ -7,8 +7,10 @@ from metamorph.interactive import input_loop, merge
 # readline might not be available on all platforms
 try:
     import readline
+
+    __readline = True
 except ImportError:
-    pass
+    __readline = False
 # colorama might not be available on all platforms
 try:
     import colorama
