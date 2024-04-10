@@ -1,6 +1,8 @@
 import re
 import sys
 
+import tqdm
+
 # colorama might not be available on all platforms
 try:
     import colorama
@@ -63,12 +65,26 @@ def input_loop(args, conf: Config):
 
 def merge(args, conf: Config):
     lines = sio.read(args.input).split("\n")
+    pregen = []
+    for line in tqdm.tqdm(lines):
+        s = ""
+        if re.match(args.skip, line):
+            s = []
+        else:
+            s = generate_alternatives(line, conf)
+        pregen.append(s)
     rets = [""] * len(lines)
-    l = 0
-    while l < len(lines):
+    l = -1
+    while l < len(lines) - 1:
+        l = l + 1
         to_translate = lines[l]
+        if re.match(args.skip, to_translate):
+            print(f"[S]: {to_translate}")
+            rets[l] = to_translate
+            continue
         print(f"[0]: {to_translate}")
-        s = generate_alternatives(to_translate, conf)
+        s = pregen[l]
+        # s = generate_alternatives(to_translate, conf)
         for i, tmp_text in enumerate(s):
             out_text = ""
             if args.colour:
@@ -91,17 +107,13 @@ def merge(args, conf: Config):
             # check if response matches the regex
             matched = re.match(regex, response)
         if "b" in response:
-            l = max(l - 1, 0)
-            continue
+            l = max(l - 1, 0) - 1
         elif "f" in response:
-            l = min(l + 1, len(lines) - 1)
-            continue
+            l = min(l + 1, len(lines) - 1) - 1
         elif "e" in response:
             j = int(response.replace("e", ""))
             rets[l] = rlinput("", trans[j])
-            l += 1
         else:
             j = int(response)
             rets[l] = trans[j]
-            l += 1
     sio.write(args.output, "\n".join(rets))

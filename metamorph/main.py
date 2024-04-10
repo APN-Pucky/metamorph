@@ -88,6 +88,13 @@ def __main__():
     )
 
     parser.add_argument(
+        "--skip",
+        type=str,
+        help="regex to skip lines",
+        default=r"^\s*$",
+    )
+
+    parser.add_argument(
         "-o",
         "--output",
         type=str,

@@ -13,6 +13,7 @@ deep_translator = "*"
 colorama = "*"
 pyyaml = "*"
 smpl_io = "*"
+tqdm = "*"
 
 [tool.poetry.scripts]
 metamorph = "metamorph.main:__main__"
