@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>metamorph.interactive &mdash; metamorph  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            metamorph
+          </a>
+              <div class="version">
+                0.0.15
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://metamorph-apn.readthedocs.io/en/stable/">RTD</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/metamorph/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/metamorph/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/metamorph">GitHub</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">metamorph</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">metamorph.interactive</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for metamorph.interactive</h1><div class="highlight"><pre>
+<span></span>import re
+import sys
+
+import tqdm
+
+# colorama might not be available on all platforms
+try:
+    import colorama
+
+    from metamorph.util import get_edits_string
+except ImportError:
+<div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/interactive/index.html#metamorph.interactive.get_edits_string">[docs]</a>    get_edits_string = lambda old, new: new</div>
+
+from smpl_io import io as sio
+
+from metamorph.config import Config
+from metamorph.handler import generate_alternatives
+
+try:
+    import readline
+
+<div class="viewcode-block" id="__readline"><a class="viewcode-back" href="../../autoapi/metamorph/interactive/index.html#metamorph.interactive.__readline">[docs]</a>    __readline = True</div>
+except ImportError:
+    __readline = False
+
+
+<div class="viewcode-block" id="rlinput"><a class="viewcode-back" href="../../autoapi/metamorph/interactive/index.html#metamorph.interactive.rlinput">[docs]</a>def rlinput(prompt, prefill=&quot;&quot;):
+    # check if readline is available
+    if __readline:
+        readline.set_startup_hook(lambda: readline.insert_text(prefill))
+    try:
+        return input(prompt)  # or raw_input in Python 2
+    finally:
+        if __readline:
+            readline.set_startup_hook()</div>
+
+
+<div class="viewcode-block" id="input_loop"><a class="viewcode-back" href="../../autoapi/metamorph/interactive/index.html#metamorph.interactive.input_loop">[docs]</a>def input_loop(args, conf: Config):
+    try:
+        while True:
+            print(&quot;Text:&quot;)
+            to_translate = input()
+            s = generate_alternatives(to_translate, conf)
+            for tmp_text in s:
+                if args.colour:
+                    print(
+                        get_edits_string(
+                            to_translate,
+                            tmp_text,
+                            conf.color,
+                            conf.on_color if args.background_colour else None,
+                        )
+                    )
+                else:
+                    print(tmp_text)
+            print()
+            if args.show_diagrams or args.show_diagram_result:
+                print(&quot;Diagram:&quot;)
+                print(conf.str_diagram(nodes=&quot;result&quot;, arrows=&quot;language&quot;))
+    except KeyboardInterrupt:
+        sys.exit(0)
+    except EOFError:
+        sys.exit(0)</div>
+
+
+<div class="viewcode-block" id="merge"><a class="viewcode-back" href="../../autoapi/metamorph/interactive/index.html#metamorph.interactive.merge">[docs]</a>def merge(args, conf: Config):
+    lines = sio.read(args.input).split(&quot;\n&quot;)
+    pregen = []
+    for line in tqdm.tqdm(lines):
+        s = &quot;&quot;
+        if re.match(args.skip, line):
+            s = []
+        else:
+            s = generate_alternatives(line, conf)
+        pregen.append(s)
+    rets = [&quot;&quot;] * len(lines)
+    l = -1
+    while l &lt; len(lines) - 1:
+        l = l + 1
+        to_translate = lines[l]
+        if re.match(args.skip, to_translate):
+            print(f&quot;[S]: {to_translate}&quot;)
+            rets[l] = to_translate
+            continue
+        print(f&quot;[0]: {to_translate}&quot;)
+        s = pregen[l]
+        # s = generate_alternatives(to_translate, conf)
+        for i, tmp_text in enumerate(s):
+            out_text = &quot;&quot;
+            if args.colour:
+                out_text = get_edits_string(
+                    to_translate,
+                    tmp_text,
+                    conf.color,
+                    conf.on_color if args.background_colour else None,
+                )
+            else:
+                out_text = f&quot;[{i+1}]: {tmp_text}&quot;
+            print(f&quot;[{i+1}]: {out_text}&quot;)
+        trans = [to_translate] + s
+        # let the user choose the translation
+        regex = f&quot;(({&#39;|&#39;.join(str(k) for k in range(len(trans)))})e?|b|f)&quot;
+        matched = None
+        response = &quot;&quot;
+        while not matched:
+            response = input(f&quot;Pick, [e]dit, [b]ack, [f]orward; /{regex}/: &quot;)
+            # check if response matches the regex
+            matched = re.match(regex, response)
+        if &quot;b&quot; in response:
+            l = max(l - 1, 0) - 1
+        elif &quot;f&quot; in response:
+            l = min(l + 1, len(lines) - 1) - 1
+        elif &quot;e&quot; in response:
+            j = int(response.replace(&quot;e&quot;, &quot;&quot;))
+            rets[l] = rlinput(&quot;&quot;, trans[j])
+        else:
+            j = int(response)
+            rets[l] = trans[j]
+    sio.write(args.output, &quot;\n&quot;.join(rets))</div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alexander Puck Neuwirth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
