@@ -22,8 +22,14 @@ Attributes
 
 .. autoapisummary::
 
+   metamorph.main.__readline
    metamorph.main.get_edits_string
 
+
+.. py:data:: __readline
+   :value: True
+
+   
 
 .. py:data:: get_edits_string
 

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>metamorph.main &mdash; metamorph  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -33,7 +35,7 @@
             metamorph
           </a>
               <div class="version">
-                0.0.14
+                0.0.15
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -86,57 +88,185 @@
 <span></span>#!/usr/bin/python3
 import argparse
 import sys
+
+from metamorph.interactive import input_loop, merge
+
 # readline might not be available on all platforms
 try:
     import readline
+
+<div class="viewcode-block" id="__readline"><a class="viewcode-back" href="../../autoapi/metamorph/main/index.html#metamorph.main.__readline">[docs]</a>    __readline = True</div>
 except ImportError:
-    pass
+    __readline = False
 # colorama might not be available on all platforms
 try:
     import colorama
+
     from metamorph.util import get_edits_string
 except ImportError:
 <div class="viewcode-block" id="get_edits_string"><a class="viewcode-back" href="../../autoapi/metamorph/main/index.html#metamorph.main.get_edits_string">[docs]</a>    get_edits_string = lambda old, new: new</div>
+
+from smpl_io import io as sio
 
 import metamorph
 from metamorph.config import Config
 from metamorph.handler import generate_alternatives
 
 
-
-
 <div class="viewcode-block" id="__main__"><a class="viewcode-back" href="../../autoapi/metamorph/main/index.html#metamorph.main.__main__">[docs]</a>def __main__():
     &quot;&quot;&quot;
     Main function.
     &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(description=&#39;Metamorph-&#39; + str(metamorph.version) + &#39; text by passing through several translators.&#39;)
-    parser.add_argument(&quot;-gs&quot;,&quot;--goal-start&quot;,type=str, help=&quot;initial and final language&quot;, default=&quot;en&quot;)
-    parser.add_argument(&quot;-g&quot;,&quot;--goal&quot;,type=str, help=&quot;final language&quot;, default=None)
-    parser.add_argument(&quot;-s&quot;,&quot;--start&quot;,type=str, help=&quot;initial language&quot;, default=None)
-    parser.add_argument(&quot;-t&quot;,&quot;--translator&quot;, type=str,help=&quot;default translator (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )&quot;,default=&quot;GoogleTranslator&quot;)
-    parser.add_argument(&quot;-l&quot;,&quot;--languages&quot;,type=str,nargs=&#39;+&#39;, help=&quot;list of intermediate languages (for more variation choose inherently different languages).&quot;, default=[&quot;de&quot;,&quot;fr&quot;,&quot;es&quot;])
+    parser = argparse.ArgumentParser(
+        description=&quot;Metamorph-&quot;
+        + str(metamorph.version)
+        + &quot; text by passing through several translators.&quot;
+    )
+    parser.add_argument(
+        &quot;-gs&quot;, &quot;--goal-start&quot;, type=str, help=&quot;initial and final language&quot;, default=&quot;en&quot;
+    )
+    parser.add_argument(&quot;-g&quot;, &quot;--goal&quot;, type=str, help=&quot;final language&quot;, default=None)
+    parser.add_argument(
+        &quot;-s&quot;, &quot;--start&quot;, type=str, help=&quot;initial language&quot;, default=None
+    )
+    parser.add_argument(
+        &quot;-t&quot;,
+        &quot;--translator&quot;,
+        type=str,
+        help=&quot;default translator (from deep_translator: GoogleTranslator, PonsTranslator, LingueeTranslator, MyMemoryTranslator, DeeplTranslator, ... )&quot;,
+        default=&quot;GoogleTranslator&quot;,
+    )
+    parser.add_argument(
+        &quot;-l&quot;,
+        &quot;--languages&quot;,
+        type=str,
+        nargs=&quot;+&quot;,
+        help=&quot;list of intermediate languages (for more variation choose inherently different languages).&quot;,
+        default=[&quot;de&quot;, &quot;fr&quot;, &quot;es&quot;],
+    )
 
-    parser.add_argument(&quot;-i&quot;,&quot;--interactive&quot;,action=&#39;store_true&#39;,help=&quot;Enable interactive mode. Will prompt for input.&quot;,default=True)
-    parser.add_argument(&quot;-ni&quot;,&quot;--non-interactive&quot;,action=&#39;store_false&#39;,help=&quot;Parse stdin, without input prompts.&quot;,dest=&quot;interactive&quot;)
-    parser.add_argument(&quot;-a&quot;,&quot;--all-in-one&quot;,action=&#39;store_true&#39;, help=&quot;Instead of parsing input line by line, parse all text at once&quot;,default=False)
+    parser.add_argument(
+        &quot;--interactive&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;Enable interactive mode. Will prompt for input.&quot;,
+        default=True,
+    )
+    parser.add_argument(
+        &quot;--no-interactive&quot;,
+        &quot;--non-interactive&quot;,
+        action=&quot;store_false&quot;,
+        help=&quot;Parse stdin, without input prompts.&quot;,
+        dest=&quot;interactive&quot;,
+    )
+    parser.add_argument(
+        &quot;-a&quot;,
+        &quot;--all-in-one&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;Instead of parsing input line by line, parse all text at once&quot;,
+        default=False,
+    )
 
-    parser.add_argument(&quot;-c&quot;,&quot;--config&quot;, type=str,help=&quot;load config from a file&quot;,default=None)
-    parser.add_argument(&quot;-v&quot;,&quot;--verbose&quot;, type=bool,help=&quot;print error messages instead of skipping them&quot;,default=False)
-    parser.add_argument(&quot;-q&quot;,&quot;--quiet&quot;, type=bool,help=&quot;suppress error messages&quot;,default=False)
+    parser.add_argument(
+        &quot;-m&quot;,
+        &quot;--merge&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;merge all translations into one&quot;,
+        default=False,
+    )
 
-    parser.add_argument(&quot;--colour&quot;,action=&#39;store_true&#39; ,help=&quot;show coloured differences&quot;,default=True)
-    parser.add_argument(&quot;-nc&quot;,&quot;--no-colour&quot;,dest=&#39;colour&#39;,action=&#39;store_false&#39; ,help=&quot;don&#39;t show coloured differences&quot;)
+    parser.add_argument(
+        &quot;--skip&quot;,
+        type=str,
+        help=&quot;regex to skip lines&quot;,
+        default=r&quot;^\s*$&quot;,
+    )
 
-    parser.add_argument(&quot;--background-colour&quot;,action=&#39;store_true&#39; ,help=&quot;show coloured deletions&quot;,default=True)
-    parser.add_argument(&quot;-nbc&quot;,&quot;--no-background-colour&quot;,dest=&#39;background_colour&#39;,action=&#39;store_false&#39; ,help=&quot;don&#39;t show coloured deletions&quot;)
+    parser.add_argument(
+        &quot;-o&quot;,
+        &quot;--output&quot;,
+        type=str,
+        help=&quot;output&quot;,
+        default=&quot;-&quot;,
+    )
 
+    parser.add_argument(
+        &quot;-i&quot;,
+        &quot;--input&quot;,
+        type=str,
+        help=&quot;input&quot;,
+        default=&quot;-&quot;,
+    )
 
-    parser.add_argument(&quot;-sd&quot;, &quot;--show-diagrams&quot;, action=&#39;store_true&#39;, help=&quot;print all diagrams&quot;,default=False )
-    parser.add_argument(&quot;-sdi&quot;, &quot;--show-diagram-init&quot;, action=&#39;store_false&#39;, help=&quot;print the diagram translation flow&quot;,default=True)
-    parser.add_argument(&quot;-hdi&quot;, &quot;--hide-diagram-init&quot;, dest=&#39;show_diagram_init&#39;,action=&#39;store_false&#39;, help=&quot;don&#39;t print the diagram translation flow&quot;)
-    parser.add_argument(&quot;-sdr&quot;, &quot;--show-diagram-result&quot;, action=&#39;store_true&#39;, help=&quot;print the diagram including intermediate translations&quot;,default=False )
+    parser.add_argument(
+        &quot;-c&quot;, &quot;--config&quot;, type=str, help=&quot;load config from a file&quot;, default=None
+    )
+    parser.add_argument(
+        &quot;-v&quot;,
+        &quot;--verbose&quot;,
+        type=bool,
+        help=&quot;print error messages instead of skipping them&quot;,
+        default=False,
+    )
+    parser.add_argument(
+        &quot;-q&quot;, &quot;--quiet&quot;, type=bool, help=&quot;suppress error messages&quot;, default=False
+    )
+
+    parser.add_argument(
+        &quot;--colour&quot;, action=&quot;store_true&quot;, help=&quot;show coloured differences&quot;, default=True
+    )
+    parser.add_argument(
+        &quot;-nc&quot;,
+        &quot;--no-colour&quot;,
+        dest=&quot;colour&quot;,
+        action=&quot;store_false&quot;,
+        help=&quot;don&#39;t show coloured differences&quot;,
+    )
+
+    parser.add_argument(
+        &quot;--background-colour&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;show coloured deletions&quot;,
+        default=True,
+    )
+    parser.add_argument(
+        &quot;-nbc&quot;,
+        &quot;--no-background-colour&quot;,
+        dest=&quot;background_colour&quot;,
+        action=&quot;store_false&quot;,
+        help=&quot;don&#39;t show coloured deletions&quot;,
+    )
+
+    parser.add_argument(
+        &quot;-sd&quot;,
+        &quot;--show-diagrams&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;print all diagrams&quot;,
+        default=False,
+    )
+    parser.add_argument(
+        &quot;-sdi&quot;,
+        &quot;--show-diagram-init&quot;,
+        action=&quot;store_false&quot;,
+        help=&quot;print the diagram translation flow&quot;,
+        default=True,
+    )
+    parser.add_argument(
+        &quot;-hdi&quot;,
+        &quot;--hide-diagram-init&quot;,
+        dest=&quot;show_diagram_init&quot;,
+        action=&quot;store_false&quot;,
+        help=&quot;don&#39;t print the diagram translation flow&quot;,
+    )
+    parser.add_argument(
+        &quot;-sdr&quot;,
+        &quot;--show-diagram-result&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;print the diagram including intermediate translations&quot;,
+        default=False,
+    )
 
     args = parser.parse_args()
+
     if args.colour:
         colorama.init()
     goal = args.goal_start
@@ -144,48 +274,44 @@ from metamorph.handler import generate_alternatives
     if args.goal is not None:
         goal = args.goal
     if args.start is not None:
-        start= args.start
+        start = args.start
 
     conf = None
     if args.config is not None:
-        conf = Config(args.config, goal=goal,start= start,translator=args.translator)
+        conf = Config(args.config, goal=goal, start=start, translator=args.translator)
     else:
-        conf = Config(flow={l:None for l in args.languages }, goal=goal,start= start,translator=args.translator)
-        
+        conf = Config(
+            flow={l: None for l in args.languages},
+            goal=goal,
+            start=start,
+            translator=args.translator,
+        )
+
+    if args.merge and not args.interactive:
+        print(&quot;Merge is only available in interactive mode.&quot;)
+        exit(-1)
+
     if args.interactive and (args.show_diagrams or args.show_diagram_init):
         print(&quot;Loaded translation diagram:&quot;)
-        print(conf.str_diagram(nodes=&quot;language&quot; ,arrows=&quot;translator_short&quot;))
+        print(conf.str_diagram(nodes=&quot;language&quot;, arrows=&quot;translator_short&quot;))
 
     if args.interactive:
-        try:
-            while True:
-                print(&quot;Text:&quot;)
-                to_translate = input()
-                s = generate_alternatives(to_translate, conf)
-                for tmp_text in s:
-                    if args.colour:
-                        print(get_edits_string(to_translate,tmp_text,conf.color,conf.on_color if args.background_colour else None))
-                    else:
-                        print(tmp_text)
-                print()
-                if args.show_diagrams or args.show_diagram_result:
-                    print(&quot;Diagram:&quot;)
-                    print(conf.str_diagram(nodes=&quot;result&quot;,arrows=&quot;language&quot;))
-        except KeyboardInterrupt:
-            sys.exit(0)
+        if args.merge:
+            merge(args, conf)
+        else:
+            input_loop(args, conf)
     else:
-        lines = sys.stdin.readlines()
+        lines = sio.read(args.input).split(&quot;\n&quot;)  # sys.stdin.readlines()
         if args.all_in_one:
             lines = [&quot;&quot;.join(lines)]
         results = None
         for line in lines:
             s = generate_alternatives(line, conf)
             if results is None:
-                results = [&quot;&quot;]*len(s)
-            for i,tmp_text in enumerate(s):
+                results = [&quot;&quot;] * len(s)
+            for i, tmp_text in enumerate(s):
                 results[i] = results[i] + tmp_text + &quot;\n&quot;
-        for tmp_text in results:
-            print(tmp_text)</div>
+        sio.write(args.output, &quot;\n&quot;.join(results))</div>
 
 
 if __name__ == &quot;__main__&quot;:
@@ -199,7 +325,7 @@ if __name__ == &quot;__main__&quot;:
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2024, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

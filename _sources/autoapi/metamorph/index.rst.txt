@@ -12,6 +12,7 @@ Submodules
 
    config/index.rst
    handler/index.rst
+   interactive/index.rst
    main/index.rst
    util/index.rst
 

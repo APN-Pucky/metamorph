@@ -1,0 +1,48 @@
+:py:mod:`metamorph.interactive`
+===============================
+
+.. py:module:: metamorph.interactive
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.interactive.rlinput
+   metamorph.interactive.input_loop
+   metamorph.interactive.merge
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   metamorph.interactive.get_edits_string
+   metamorph.interactive.__readline
+
+
+.. py:data:: get_edits_string
+
+   
+
+.. py:data:: __readline
+   :value: True
+
+   
+
+.. py:function:: rlinput(prompt, prefill='')
+
+
+.. py:function:: input_loop(args, conf: metamorph.config.Config)
+
+
+.. py:function:: merge(args, conf: metamorph.config.Config)
+
+
