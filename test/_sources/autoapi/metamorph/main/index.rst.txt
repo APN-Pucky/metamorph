@@ -1,24 +1,11 @@
-:py:mod:`metamorph.main`
-========================
+metamorph.main
+==============
 
 .. py:module:: metamorph.main
 
 
-Module Contents
----------------
-
-
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   metamorph.main.__main__
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -26,14 +13,22 @@ Attributes
    metamorph.main.get_edits_string
 
 
+Functions
+---------
+
+.. autoapisummary::
+
+   metamorph.main.__main__
+
+
+Module Contents
+---------------
+
 .. py:data:: __readline
    :value: True
 
-   
 
 .. py:data:: get_edits_string
-
-   
 
 .. py:function:: __main__()
 

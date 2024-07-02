@@ -1,21 +1,19 @@
-:py:mod:`metamorph.util`
-========================
+metamorph.util
+==============
 
 .. py:module:: metamorph.util
 
 
-Module Contents
----------------
-
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
    metamorph.util.get_edits_string
 
 
+Module Contents
+---------------
 
 .. py:function:: get_edits_string(old: str, new: str, color: str = 'green', on_color: str = 'on_red')
 

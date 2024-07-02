@@ -1,36 +1,32 @@
-:py:mod:`metamorph`
-===================
+metamorph
+=========
 
 .. py:module:: metamorph
 
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   config/index.rst
-   handler/index.rst
-   interactive/index.rst
-   main/index.rst
-   util/index.rst
+   /autoapi/metamorph/config/index
+   /autoapi/metamorph/handler/index
+   /autoapi/metamorph/interactive/index
+   /autoapi/metamorph/main/index
+   /autoapi/metamorph/util/index
 
-
-Package Contents
-----------------
 
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    metamorph.Config
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -38,15 +34,18 @@ Functions
    metamorph.translate
 
 
+Package Contents
+----------------
 
 .. py:class:: Config(file: str = None, start='en', goal='en', translator='GoogleTranslator', proxies=None, api_keys=None, flow=None, color='green', on_color='on_red')
 
-
    Defines the language flow to generate alternative texts.
+
 
    .. py:method:: get_api_key(translator)
 
       Returns the api key for ``translator``.
+
 
 
    .. py:method:: load_file(file: str)
@@ -54,9 +53,11 @@ Functions
       Loads a configuration file.
 
 
+
    .. py:method:: default_extra(direct, k)
 
       Adds default keys to dictionary at ``direct[k]``.
+
 
 
    .. py:method:: fill_missing(direct)
@@ -64,16 +65,17 @@ Functions
       Sets default extras for missing elements in dictionary.
 
 
+
    .. py:method:: str_diagram(nodes='language', arrows=None)
 
       Prints a diagram of the language flow.
+
 
 
    .. py:method:: _recursive_get_str_max_length(sub, key)
 
 
    .. py:method:: _recursive_str_diagram(sub, kk, depth=1, lines=None, nodes='language', arrows=None, len_nodes=None, len_arrows=None)
-
 
 
 .. py:function:: generate_alternatives(text, conf)

@@ -1,15 +1,11 @@
-:py:mod:`metamorph.handler`
-===========================
+metamorph.handler
+=================
 
 .. py:module:: metamorph.handler
 
 
-Module Contents
----------------
-
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -18,6 +14,8 @@ Functions
    metamorph.handler.translate
 
 
+Module Contents
+---------------
 
 .. py:function:: generate_alternatives(text, conf)
 
